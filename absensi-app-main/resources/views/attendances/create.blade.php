@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('tom-select/tom-select.css') }}">
 @endpush
 
-@section('buttons')
+<!-- @section('buttons')
 <div class="btn-toolbar mb-2 mb-md-0">
     <div>
         <a href="{{ route('attendances.index') }}" class="btn btn-sm btn-light">
@@ -13,12 +13,40 @@
         </a>
     </div>
 </div>
-@endsection
+@endsection -->
 
 @section('content')
-<div class="row">
-    <div class="col-md-7">
-        <livewire:attendance-create-form />
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Absensi</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Absensi</a></li>
+                    </ol>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bookmark">
+                        <div class="btn-toolbar justify-content-end">
+                            <div>
+                                <a href="{{ route('attendances.index') }}" class="btn btn-sm btn-light">
+                                    <span data-feather="arrow-left-circle" class="align-text-bottom"></span>
+                                    Kembali
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Container-fluid starts-->
+
+    <livewire:attendance-create-form />
 </div>
+<!-- <div class="row">
+    <div class="col-md-7">
+    </div>
+</div> -->
 @endsection

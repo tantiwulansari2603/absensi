@@ -15,7 +15,7 @@
 
 <body>
 
-    <x-toast-container />
+    <!-- <x-toast-container /> -->
 
     @yield('base')
 

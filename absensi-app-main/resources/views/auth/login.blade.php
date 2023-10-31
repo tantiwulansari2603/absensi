@@ -13,13 +13,11 @@
             <h1 class="h3 mb-3 fw-normal">Silahkan masuk untuk absensi</h1>
 
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInputEmail" name="email"
-                    placeholder="name@example.com">
+                <input type="email" class="form-control" id="floatingInputEmail" name="email" placeholder="name@example.com">
                 <label for="floatingInputEmail">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" name="password"
-                    placeholder="Password">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
 
@@ -31,7 +29,7 @@
             </div>
 
             <button class="w-100 btn btn-primary" type="submit" id="login-form-button">Masuk</button>
-            <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+            <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
         </form>
     </main>
 

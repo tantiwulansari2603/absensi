@@ -12,9 +12,36 @@
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-md-7">
-        <livewire:employee-edit-form :employees="$employees" />
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Karyawan</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Karyawan</a></li>
+                    </ol>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bookmark">
+                        <div class="btn-toolbar justify-content-end">
+                            <div>
+                                <a href="{{ route('positions.index') }}" class="btn btn-sm btn-light">
+                                    <span data-feather="arrow-left-circle" class="align-text-bottom"></span>
+                                    Kembali
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Container-fluid starts-->
+    <livewire:employee-edit-form :employees="$employees" />
 </div>
+<!-- <div class="row">
+    <div class="col-md-7">
+    </div>
+</div> -->
 @endsection
