@@ -13,10 +13,10 @@
             <p class="text-muted">{{ $attendance->description }}</p>
 
             <div class="mb-4">
-                <span class="badge text-bg-light border shadow-sm">Masuk : {{
+                <span class="badge rounded-pill bg-info" style="font-size: 12px;">Masuk : {{
                     substr($attendance->data->start_time, 0 , -3) }} - {{
                     substr($attendance->data->batas_start_time,0,-3 )}}</span>
-                <span class="badge text-bg-light border shadow-sm">Pulang : {{
+                <span class="badge rounded-pill bg-info" style="font-size: 12px;">Pulang : {{
                     substr($attendance->data->end_time, 0 , -3) }} - {{
                     substr($attendance->data->batas_end_time,0,-3 )}}</span>
             </div>
@@ -33,7 +33,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">No</th>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Jam Masuk</th>
                             <th scope="col">Jam Pulang</th>
@@ -52,9 +52,9 @@
                             <td>{{ $date }}</td>
                             <td colspan="3">
                                 @if($date == now()->toDateString())
-                                <div class="badge text-bg-info">Belum Hadir</div>
+                                <div class="badge rounded-pill bg-info">Belum Hadir</div>
                                 @else
-                                <div class="badge text-bg-danger">Tidak Hadir</div>
+                                <div class="badge rounded-pill bg-danger">Tidak Hadir</div>
                                 @endif
                             </td>
                             @else
@@ -63,14 +63,14 @@
                             <td>@if($histo->presence_out_time)
                                 {{ $histo->presence_out_time }}
                                 @else
-                                <span class="badge text-bg-danger">Belum Absensi Pulang</span>
+                                <span class="badge rounded-pill bg-danger">Belum Absensi Pulang</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($histo->is_permission)
-                                <div class="badge text-bg-warning">Izin</div>
+                                <div class="badge rounded-pill bg-warning">Izin</div>
                                 @else
-                                <div class="badge text-bg-success">Hadir</div>
+                                <div class="badge rounded-pill bg-success">Hadir</div>
                                 @endif
                             </td>
                             @endif

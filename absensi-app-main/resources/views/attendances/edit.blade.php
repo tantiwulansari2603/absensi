@@ -17,9 +17,9 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3>Jabatan / Posisi</h3>
+                    <h3>Absensi</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Jabatan / Posisi</a></li>
+                        <li class="breadcrumb-item"><a href="index.html">Absensi</a></li>
                     </ol>
                 </div>
                 <div class="col-sm-6">
