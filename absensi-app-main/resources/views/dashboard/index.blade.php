@@ -1,26 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- <div>
-                                                                                                                                                                                                                                        <div class="row">
-                                                                                                                                                                                                                                            <div class="col-md-3">
-                                                                                                                                                                                                                                                <div class="card shadow">
-                                                                                                                                                                                                                                                    <div class="card-body">
-                                                                                                                                                                                                                                                        <h6 class="fs-6 fw-light">Data Jabatan</h6>
-                                                                                                                                                                                                                                                        <h4 class="fw-bold">{{ $positionCount }}</h4>
-                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                            <div class="col-md-3">
-                                                                                                                                                                                                                                                <div class="card shadow">
-                                                                                                                                                                                                                                                    <div class="card-body">
-                                                                                                                                                                                                                                                        <h6 class="fs-6 fw-light">Data Karyawan</h6>
-                                                                                                                                                                                                                                                        <h4 class="fw-bold">{{ $userCount }}</h4>
-                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                    </div> -->
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-header">
@@ -160,7 +140,6 @@
                                                     <p class="m-0 f-14">{{ $city }}</p>
                                                 </div>
                                             </div>
-
                                             <div class="date f-24 mb-2 d-inline-block" id="date">
                                                 <span class="b-r-dark pe-3" id="monthDay"></span>
                                                 <span class="ps-3" id="year"></span>
