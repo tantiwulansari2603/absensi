@@ -16335,7 +16335,7 @@ footer {
   padding: 15px;
   bottom: 0;
   left: 0;
-  margin-left: 275px; }
+  margin-left: 0px; }
   footer a {
     font-weight: 600; }
   footer.footer-starter-kit {
@@ -16344,6 +16344,9 @@ footer {
     font-size: 14px;
     font-weight: 500;
     color: #999; }
+  .footer-bottom {
+    margin-left: 275px;
+  }  
 
 .page-wrapper .page-body-wrapper .footer-dark {
   background-color: #2b2b2b; }
