@@ -28,3 +28,7 @@
 <link id="color" rel="stylesheet" href="{{ asset('assets/css/color-1.css')}}" media="screen">
 <!-- Responsive css-->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css')}}">
+{{-- Main CSS --}}
+<link rel="stylesheet" href="{{ asset('css/main.css') }}">
+{{-- Livewire CSS --}}
+@livewireStyles
