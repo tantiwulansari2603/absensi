@@ -26,7 +26,7 @@
                     <div class="bookmark">
                         <div class="btn-toolbar justify-content-end">
                             <div>
-                                <a href="{{ route('positions.index') }}" class="btn btn-sm btn-light">
+                                <a href="{{ route('employees.index') }}" class="btn btn-sm btn-light">
                                     <span data-feather="arrow-left-circle" class="align-text-bottom"></span>
                                     Kembali
                                 </a>
