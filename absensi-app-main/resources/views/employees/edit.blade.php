@@ -19,7 +19,7 @@
                 <div class="col-sm-6">
                     <h3>Karyawan</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Karyawan</a></li>
+                        <li class="breadcrumb-item"><a href="#">Karyawan</a></li>
                     </ol>
                 </div>
                 <div class="col-sm-6">

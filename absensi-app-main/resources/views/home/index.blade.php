@@ -11,8 +11,7 @@
                 <div class="card-body">
                     <ul class="list-group">
                         @foreach ($attendances as $attendance)
-                        <a href="{{ route('home.show', $attendance->id) }}"
-                            class="list-group-item d-flex justify-content-between align-items-start py-3">
+                        <a href="{{ route('home.show', $attendance->id) }}" class="list-group-item d-flex justify-content-between align-items-start py-3">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">{{ $attendance->title }}</div>
                                 <p class="mb-0">{{ $attendance->description }}</p>
@@ -30,7 +29,7 @@
                     Informasi Karyawan
                 </div>
                 <div class="card-body">
-                    <ul class="ps-3">
+                    <ul class="ps-2">
                         <li class="mb-1">
                             <span class="fw-bold d-block">Nama : </span>
                             <span>{{ auth()->user()->name }}</span>

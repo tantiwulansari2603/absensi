@@ -23,7 +23,7 @@
                 <div class="col-sm-6">
                     <h3>Hari Libur</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Hari Libur</a></li>
+                        <li class="breadcrumb-item"><a href="#">Hari Libur</a></li>
                     </ol>
                 </div>
                 <div class="col-sm-6">

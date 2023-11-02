@@ -19,7 +19,7 @@
                 <div class="col-sm-6">
                     <h3>Data kehadiran</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Data kehadiran</a></li>
+                        <li class="breadcrumb-item"><a href="#">Data kehadiran</a></li>
                     </ol>
                 </div>
                 <div class="col-sm-6">
@@ -110,7 +110,7 @@
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ $user['id'] }}">
                                 <input type="hidden" name="presence_date" value="{{ $data['not_presence_date'] }}">
-                                <button class="badge text-bg-primary border-0" type="submit">Hadir</button>
+                                <button class="btn btn-pill bg-primary btn-xs" type="submit">Hadir</button>
                             </form>
                         </td>
                     </tr>

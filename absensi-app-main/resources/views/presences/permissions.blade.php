@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 <!-- @section('buttons')
 <div class="btn-toolbar mb-2 mb-md-0">
     <div>
@@ -19,7 +20,7 @@
                 <div class="col-sm-6">
                     <h3>Data kehadiran</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Data kehadiran</a></li>
+                        <li class="breadcrumb-item"><a href="#">Data kehadiran</a></li>
                     </ol>
                 </div>
                 <div class="col-sm-6">
@@ -105,9 +106,9 @@
                         <td>{{ $permission->user->position->name }}</td>
                         @if ($permission->is_accepted)
                         <td>
-                            <span class="badge text-bg-success border-0">Sudah Diterima</span>
-                            <button class="badge text-bg-info border-0 permission-detail-modal-triggers" data-permission-id="{{ $permission->id }}" data-bs-toggle="modal" data-bs-target="#permission-detail-modal">Lihat
-                                Alasan</button>
+                            <span class="badge rounded-pill bg-success" style="font-size: 12px;">Sudah Diterima</span>
+                            <span class="badge rounded-pill bg-info" style="font-size: 12px;" data-permission-id="{{ $permission->id }}" data-bs-toggle="modal" data-bs-target="#permission-detail-modal">Lihat
+                                Alasan</span>
                         </td>
                         @else
                         <td>
@@ -115,10 +116,10 @@
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ $permission->user->id }}">
                                 <input type="hidden" name="permission_date" value="{{ $permission->permission_date }}">
-                                <button class="badge text-bg-primary border-0" type="submit">Terima</button>
+                                <button class="btn btn-pill bg-primary btn-xs" style="font-size: 12px;" type="submit">Terima</button>
                             </form>
-                            <button class="badge text-bg-info border-0 permission-detail-modal-triggers" data-permission-id="{{ $permission->id }}" data-bs-toggle="modal" data-bs-target="#permission-detail-modal">Lihat
-                                Alasan</button>
+                            <span class="badge rounded-pill bg-info" style="font-size: 12px;" data-permission-id="{{ $permission->id }}" data-bs-toggle="modal" data-bs-target="#permission-detail-modal">Lihat
+                                Alasan</span>
                         </td>
                         @endif
                     </tr>

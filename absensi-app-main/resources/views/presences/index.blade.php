@@ -8,7 +8,7 @@
                 <div class="col-sm-6">
                     <h3>Data kehadiran</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Data kehadiran</a></li>
+                        <li class="breadcrumb-item"><a href="#">Data kehadiran</a></li>
                     </ol>
                 </div>
             </div>
