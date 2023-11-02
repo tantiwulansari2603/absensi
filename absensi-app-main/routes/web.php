@@ -8,6 +8,7 @@ use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PresenceController;
+use App\Http\Controllers\WeatherController as WeatherController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -26,6 +27,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::middleware('auth')->group(function () {
     Route::middleware('role:admin,operator')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+        // Route::get('/temperature', [DashboardController::class, 'getTemperature'])->name('dashboard.temperature');
+
         // positions
         Route::resource('/positions', PositionController::class)->only(['index', 'create']);
         Route::get('/positions/edit', [PositionController::class, 'edit'])->name('positions.edit');
@@ -38,6 +41,10 @@ Route::middleware('auth')->group(function () {
         // attendances (absensi)
         Route::resource('/attendances', AttendanceController::class)->only(['index', 'create']);
         Route::get('/attendances/edit', [AttendanceController::class, 'edit'])->name('attendances.edit');
+
+        // Route::get('/temperature', [WeatherController::class, 'getTemperature']);
+
+        // Route::get('/temperature', 'WeatherController@getTemperature');
 
         // presences (kehadiran)
         Route::resource('/presences', PresenceController::class)->only(['index']);

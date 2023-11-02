@@ -2,25 +2,25 @@
 
 @section('content')
     <!-- <div>
-                                                                                                                                                                                                <div class="row">
-                                                                                                                                                                                                    <div class="col-md-3">
-                                                                                                                                                                                                        <div class="card shadow">
-                                                                                                                                                                                                            <div class="card-body">
-                                                                                                                                                                                                                <h6 class="fs-6 fw-light">Data Jabatan</h6>
-                                                                                                                                                                                                                <h4 class="fw-bold">{{ $positionCount }}</h4>
-                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                    <div class="col-md-3">
-                                                                                                                                                                                                        <div class="card shadow">
-                                                                                                                                                                                                            <div class="card-body">
-                                                                                                                                                                                                                <h6 class="fs-6 fw-light">Data Karyawan</h6>
-                                                                                                                                                                                                                <h4 class="fw-bold">{{ $userCount }}</h4>
-                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                </div>
-                                                                                                                                                                                            </div> -->
+                                                                                                                                                                                                                                        <div class="row">
+                                                                                                                                                                                                                                            <div class="col-md-3">
+                                                                                                                                                                                                                                                <div class="card shadow">
+                                                                                                                                                                                                                                                    <div class="card-body">
+                                                                                                                                                                                                                                                        <h6 class="fs-6 fw-light">Data Jabatan</h6>
+                                                                                                                                                                                                                                                        <h4 class="fw-bold">{{ $positionCount }}</h4>
+                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                            <div class="col-md-3">
+                                                                                                                                                                                                                                                <div class="card shadow">
+                                                                                                                                                                                                                                                    <div class="card-body">
+                                                                                                                                                                                                                                                        <h6 class="fs-6 fw-light">Data Karyawan</h6>
+                                                                                                                                                                                                                                                        <h4 class="fw-bold">{{ $userCount }}</h4>
+                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                    </div> -->
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-header">
@@ -54,7 +54,7 @@
                     <div class="card o-hidden border-0">
                         <div class="bg-secondary b-r-4 card-body">
                             <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="shopping-bag"></i></div>
+                                <div class="align-self-center text-center"><i data-feather="user"></i></div>
                                 <div class="media-body"><span class="m-0">Data Karyawan</span>
                                     <h4 class="mb-0 counter">{{ $userCount }}</h4><i class="icon-bg"
                                         data-feather="user"></i>
@@ -156,8 +156,8 @@
                                                 </svg>
                                                 <!-- cloudRainMoon-->
                                                 <div class="media-body align-self-center text-white">
-                                                    <h4 class="m-0 f-w-600 num">95°F</h4>
-                                                    <p class="m-0 f-14">Peris</p>
+                                                    <h4 class="m-0 f-w-600 num">{{ $temperature }} °C.</h4>
+                                                    <p class="m-0 f-14">{{ $city }}</p>
                                                 </div>
                                             </div>
 
