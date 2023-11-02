@@ -55,7 +55,7 @@
                                 <small class="fw-bold text-muted d-block">Jabatan / Posisi</small>
                                 <div>
                                     @foreach ($attendance->positions as $position)
-                                    <span class="badge text-bg-success d-inline-block me-1">{{ $position->name }}</span>
+                                    <span class="badge rounded-pill bg-success">{{ $position->name }}</span>
                                     @endforeach
                                 </div>
                             </div>

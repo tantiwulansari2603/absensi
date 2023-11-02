@@ -217,7 +217,7 @@ final class AttendanceTable extends PowerGridComponent
     {
         return [
             Button::make('edit', 'Edit')
-                ->class('badge text-bg-success')
+                ->class('badge rounded-pill bg-success')
                 ->target('')
                 ->route('attendances.edit', ['id' => 'id']),
 
