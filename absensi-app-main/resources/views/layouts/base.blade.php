@@ -15,7 +15,7 @@
 
 <body>
 
-    <!-- <x-toast-container /> -->
+    @extends('components.toast-container')
 
     @yield('base')
 

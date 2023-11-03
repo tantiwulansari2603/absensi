@@ -1,3 +1,6 @@
+{{-- Bootstrap 5.2 CSS --}}
+<link rel="stylesheet" href="{{ asset('bootstrap5/css/bootstrap.min.css') }}">
+
 <link rel="icon" href="{{ asset('assets/images/favicon.png')}}" type="image/x-icon">
 <!-- Google font-->
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -28,7 +31,5 @@
 <link id="color" rel="stylesheet" href="{{ asset('assets/css/color-1.css')}}" media="screen">
 <!-- Responsive css-->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css')}}">
-{{-- Main CSS --}}
-<link rel="stylesheet" href="{{ asset('css/main.css') }}">
 {{-- Livewire CSS --}}
 @livewireStyles

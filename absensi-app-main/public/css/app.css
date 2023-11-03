@@ -95,7 +95,7 @@ body {
   }
   
   .toast-overflow{
-    overflow-y: scroll;
+    overflow-y: hidden;
     max-height: 100vh;
   }
   
