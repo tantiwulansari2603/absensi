@@ -2,13 +2,13 @@
 
 <!-- @section('buttons')
     <div class="btn-toolbar mb-2 mb-md-0">
-            <div>
-                <a href="{{ route('employees.index') }}" class="btn btn-sm btn-light">
-                    <span data-feather="arrow-left-circle" class="align-text-bottom"></span>
-                    Kembali
-                </a>
+                <div>
+                    <a href="{{ route('employees.index') }}" class="btn btn-sm btn-light">
+                        <span data-feather="arrow-left-circle" class="align-text-bottom"></span>
+                        Kembali
+                    </a>
+                </div>
             </div>
-        </div>
 @endsection -->
 
 @section('content')
@@ -17,9 +17,9 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3>Peserta Magang</h3>
+                        <h3>Karyawan</h3>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Peserta Magang</a></li>
+                            <li class="breadcrumb-item"><a href="#">Karyawan</a></li>
                         </ol>
                     </div>
                     <div class="col-sm-6">
@@ -41,7 +41,7 @@
         <livewire:employee-create-form />
     </div>
     <!-- <div class="row">
-            <div class="col-md-7">
-            </div>
-        </div> -->
+                <div class="col-md-7">
+                </div>
+            </div> -->
 @endsection
