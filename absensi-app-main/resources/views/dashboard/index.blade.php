@@ -35,7 +35,7 @@
                         <div class="bg-secondary b-r-4 card-body">
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="user"></i></div>
-                                <div class="media-body"><span class="m-0">Data Karyawan</span>
+                                <div class="media-body"><span class="m-0">Data Peserta Magang</span>
                                     <h4 class="mb-0 counter">{{ $userCount }}</h4><i class="icon-bg"
                                         data-feather="user"></i>
                                 </div>
