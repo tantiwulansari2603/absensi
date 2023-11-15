@@ -25,7 +25,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 Route::middleware('auth')->group(function () {
-    Route::middleware('role:admin,operator')->group(function () {
+    Route::middleware('role:admin')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
         // Route::get('/temperature', [DashboardController::class, 'getTemperature'])->name('dashboard.temperature');
 

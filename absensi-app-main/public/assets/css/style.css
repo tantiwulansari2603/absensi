@@ -1534,8 +1534,8 @@ a:hover {
 
 .btn-outline-danger-2x {
   border-width: 2px;
-  border-color: #d22d3d;
-  color: #d22d3d;
+  border-color: #ffffff;
+  color: #ffffff;
   background-color: transparent; }
   .btn-outline-danger-2x:hover, .btn-outline-danger-2x:focus, .btn-outline-danger-2x:active, .btn-outline-danger-2x.active {
     color: white;

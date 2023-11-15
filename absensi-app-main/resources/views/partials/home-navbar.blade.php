@@ -10,7 +10,7 @@
                     <a class="nav-link {{ request()->routeIs('home.*') ? 'active fw-bold' : '' }}" aria-current="page" href="{{ route('home.index') }}" style="color: white;">Dashboard</a>
                 </li>
                 <li class="nav-item px-4 py-1 px-md-0 py-md-0">
-                    <form action="{{ route('auth.logout') }}" method="post">
+                    <form action="{{ route('auth.logout') }}" method="post" onsubmit="return confirm('Apakah anda yakin ingin keluar?')">
                         @method('DELETE')
                         @csrf
                         <button class="btn btn-outline-danger-2x">Log out</button>

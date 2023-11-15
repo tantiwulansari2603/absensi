@@ -112,7 +112,7 @@
                         </td>
                         @else
                         <td>
-                            <form action="{{ route('presences.acceptPermission', $attendance->id) }}" method="post">
+                            <form class="badge" action="{{ route('presences.acceptPermission', $attendance->id) }}" method="post">
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ $permission->user->id }}">
                                 <input type="hidden" name="permission_date" value="{{ $permission->permission_date }}">
@@ -135,7 +135,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Detail Izin</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <ul>
@@ -146,12 +145,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <form action="{{ route('presences.acceptPermission', $attendance->id) }}" method="post">
-                        @csrf
-                        <input type="hidden" name="user_id" value="{{ $permission->user->id }}">
-                        <input type="hidden" name="permission_date" value="{{ $permission->permission_date }}">
-                        <button class="btn btn-primary border-0" type="submit">Terima</button>
-                    </form>
                 </div>
             </div>
         </div>
