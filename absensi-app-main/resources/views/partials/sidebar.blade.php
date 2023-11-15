@@ -15,8 +15,7 @@
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2"
                                 aria-hidden="true"></i></div>
                     </li>
-                    @if (auth()->user()->isAdmin() or
-                            auth()->user()->isOperator())
+                    @if (auth()->user()->isAdmin())
                         <li class="sidebar-main-title">
                             <a class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}"
                                 aria-current="page" href="{{ route('dashboard.index') }}">

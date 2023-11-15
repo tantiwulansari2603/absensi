@@ -205,12 +205,12 @@ final class EmployeeTable extends PowerGridComponent
 
             Column::make('Jabatan', 'position', 'positions.name')
                 ->searchable()
-                ->makeInputMultiSelect(Position::all(), 'name', 'position_id')
+                ->makeInputSelect(Position::all(), 'name', 'position_id')
                 ->sortable(),
 
             Column::make('Role', 'role', 'roles.name')
                 ->searchable()
-                ->makeInputMultiSelect(Role::all(), 'name', 'role_id')
+                ->makeInputSelect(Role::all(), 'name', 'role_id')
                 ->sortable(),
 
             Column::make('Created at', 'created_at', 'users.created_at')
