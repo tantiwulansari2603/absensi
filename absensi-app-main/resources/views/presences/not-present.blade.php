@@ -76,11 +76,11 @@
         @foreach ($notPresentData as $data)
         <div class="p-3 rounded border my-3 d-flex align-items-center justify-content-between">
             <div>Hari : <span class="fw-bold">
-                    {{ \Carbon\Carbon::parse($data['not_presence_date'])->dayName }}
+                    {{ \Carbon\Carbon::parse($data['not_presence_date'])->locale('id')->isoFormat('dddd') }}
                     {{ \Carbon\Carbon::parse($data['not_presence_date'])->isCurrentDay() ? '(Hari ini)' : '' }}
                 </span>
             </div>
-            <div>Tanggal : <span class="fw-bold">{{ $data['not_presence_date'] }}</span></div>
+            <div>Tanggal : <span class="fw-bold">{{ \Carbon\Carbon::parse($data['not_presence_date'])->translatedFormat('d F Y') }}</span></div>
             <div>Jumlah : <span class="fw-bold">{{ count($data['users']) }}</span></div>
         </div>
         <div class="table-responsive">

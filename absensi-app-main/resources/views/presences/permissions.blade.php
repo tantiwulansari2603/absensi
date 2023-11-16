@@ -71,11 +71,11 @@
     <div>
         <div class="p-3 rounded border my-3 d-flex align-items-center justify-content-between">
             <div>Hari : <span class="fw-bold">
-                    {{ \Carbon\Carbon::parse($date)->dayName }}
+                    {{ \Carbon\Carbon::parse($date)->locale('id')->isoFormat('dddd') }}
                     {{ \Carbon\Carbon::parse($date)->isCurrentDay() ? '(Hari ini)' : '' }}
                 </span>
             </div>
-            <div>Tanggal : <span class="fw-bold">{{ $date }}</span></div>
+            <div>Tanggal : <span class="fw-bold">{{ \Carbon\Carbon::parse($date)->translatedFormat('d F Y') }}</span></div>
             <div>Jumlah : <span class="fw-bold">{{ $permissions->count() }}</span></div>
         </div>
         @if (count($permissions) === 0)
