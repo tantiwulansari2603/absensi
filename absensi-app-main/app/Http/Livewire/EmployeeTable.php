@@ -95,7 +95,7 @@ final class EmployeeTable extends PowerGridComponent
             Exportable::make('export')
                 ->striped()
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-            Header::make()->showSearchInput()->showToggleColumns(),
+            // Header::make()->showSearchInput()->showToggleColumns(),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -152,7 +152,7 @@ final class EmployeeTable extends PowerGridComponent
     public function addColumns(): PowerGridEloquent
     {
         return PowerGrid::eloquent()
-            ->addColumn('id')
+            // ->addColumn('id')
             ->addColumn('name')
             ->addColumn('email')
             ->addColumn('phone')
@@ -183,9 +183,9 @@ final class EmployeeTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id', 'users.id')
-                ->searchable()
-                ->sortable(),
+            // Column::make('ID', 'id', 'users.id')
+            //     ->searchable()
+            //     ->sortable(),
 
             Column::make('Name', 'name', 'users.name')
                 ->searchable()

@@ -139,7 +139,7 @@ final class PositionTable extends PowerGridComponent
     public function addColumns(): PowerGridEloquent
     {
         return PowerGrid::eloquent()
-            ->addColumn('id')
+            // ->addColumn('id')
             ->addColumn('name')
             ->addColumn('created_at')
             ->addColumn('created_at_formatted', fn (Position $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
@@ -162,9 +162,9 @@ final class PositionTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id')
-                ->searchable()
-                ->sortable(),
+            // Column::make('ID', 'id')
+            //     ->searchable()
+            //     ->sortable(),
 
             Column::make('Name', 'name')
                 ->searchable()

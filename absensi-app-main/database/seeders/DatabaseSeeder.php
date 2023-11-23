@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
             'role_id' => Role::where('name', 'admin')->first('id'),
             'position_id' => Position::where('name', 'admin')->first('id'),
         ]);
-        \App\Models\User::factory(10)->create([
-            'role_id' => Role::where('name', 'user')->first('id'), // user === employee
-            'position_id' => Position::select('id')->inRandomOrder()->first()->id
-        ]);
+        // \App\Models\User::factory(0)->create([
+        //     'role_id' => Role::where('name', 'user')->first('id'), // user === employee
+        //     'position_id' => Position::select('id')->inRandomOrder()->first()->id
+        // ]);
     }
 }

@@ -125,7 +125,7 @@ final class AttendanceTable extends PowerGridComponent
     public function addColumns(): PowerGridEloquent
     {
         return PowerGrid::eloquent()
-            ->addColumn('id')
+            // ->addColumn('id')
             ->addColumn('title')
             ->addColumn('description')
             ->addColumn('start_time', fn (Attendance $model) => substr($model->start_time, 0, -3) . "-" . substr($model->batas_start_time, 0, -3))
@@ -154,9 +154,9 @@ final class AttendanceTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id')
-                ->searchable()
-                ->sortable(),
+            // Column::make('ID', 'id')
+            //     ->searchable()
+            //     ->sortable(),
 
             Column::make('Nama', 'title')
                 ->searchable()
