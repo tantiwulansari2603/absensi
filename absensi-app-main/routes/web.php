@@ -8,7 +8,7 @@ use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PresenceController;
-use App\Http\Controllers\WeatherController as WeatherController;
+use App\Http\Controllers\DosenController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -70,6 +70,10 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/absensi/{attendance}', [HomeController::class, 'show'])->name('show');
         Route::get('/absensi/{attendance}/permission', [HomeController::class, 'permission'])->name('permission');
+    });
+
+    Route::middleware('role:dosen')->name('home.')->group(function () {
+        Route::get('/', [DosenController::class, 'index'])->name('index');
     });
 
     Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout');
