@@ -4,6 +4,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PositionController;
@@ -32,6 +33,9 @@ Route::middleware('auth')->group(function () {
         // positions
         Route::resource('/positions', PositionController::class)->only(['index', 'create']);
         Route::get('/positions/edit', [PositionController::class, 'edit'])->name('positions.edit');
+        // school
+        Route::resource('/school', SchoolController::class)->only(['index', 'create']);
+        Route::get('/school/edit', [SchoolController::class, 'edit'])->name('school.edit');
         // employees
         Route::resource('/employees', EmployeeController::class)->only(['index', 'create']);
         Route::get('/employees/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
