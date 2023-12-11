@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md bg-primary py-3">
     <div class="container">
-        <a class="navbar-brand bg-transparent fw-bold" href="{{ route('home.index') }}" style="color: white;">Absensi App</a>
+        <a class="navbar-brand bg-transparent fw-bold" href="#" style="color: white;">Absensi App</a>
         <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

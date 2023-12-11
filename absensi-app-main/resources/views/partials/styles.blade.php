@@ -33,3 +33,5 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css')}}">
 {{-- Livewire CSS --}}
 @livewireStyles
+{{-- Leaflet CSS --}}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />

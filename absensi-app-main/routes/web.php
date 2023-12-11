@@ -10,6 +10,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\WeatherController as WeatherController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -64,6 +66,9 @@ Route::middleware('auth')->group(function () {
         // employees permissions
 
         Route::get('/presences/{attendance}/permissions', [PresenceController::class, 'permissions'])->name('presences.permissions');
+        // Lokasi
+        Route::resource('/location', LocationController::class)->only(['index', 'create']);
+        Route::get('/location/edit', [LocationController::class, 'edit'])->name('location.edit');
     });
 
     Route::middleware('role:user')->name('home.')->group(function () {
