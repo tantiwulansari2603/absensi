@@ -38,7 +38,7 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
-    <livewire:location-edit-form :location="$location" />
+    <livewire:location-edit-form :locations="$location" />
 </div>
 <!-- <div class="row">
     <div class="col-md-7">
