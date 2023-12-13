@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Position;
 use App\Models\Role;
+use App\Models\School;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
@@ -120,7 +121,8 @@ final class EmployeeTable extends PowerGridComponent
         return User::query()
             ->join('roles', 'users.role_id', '=', 'roles.id')
             ->join('positions', 'users.position_id', '=', 'positions.id')
-            ->select('users.*', 'roles.name as role', 'positions.name as position');
+            ->join('schools', 'users.schools_id', '=', 'schools.id')
+            ->select('users.*', 'roles.name as role', 'positions.name as position', 'schools.nama_sekolah as school');
     }
 
     /*
@@ -149,6 +151,7 @@ final class EmployeeTable extends PowerGridComponent
     | You can pass a closure to transform/modify the data.
     |
     */
+
     public function addColumns(): PowerGridEloquent
     {
         return PowerGrid::eloquent()
@@ -161,6 +164,9 @@ final class EmployeeTable extends PowerGridComponent
             })
             ->addColumn('position', function (User $model) {
                 return ucfirst($model->position);
+            })
+            ->addColumn('school', function (User $model) {
+                return ucfirst($model->school);
             })
             ->addColumn('created_at')
             ->addColumn('created_at_formatted', fn (User $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
@@ -211,6 +217,11 @@ final class EmployeeTable extends PowerGridComponent
             Column::make('Role', 'role', 'roles.name')
                 ->searchable()
                 ->makeInputSelect(Role::all(), 'name', 'role_id')
+                ->sortable(),
+
+            Column::make('Sekolah', 'school', 'schools.nama_sekolah')
+                ->searchable()
+                ->makeInputSelect(School::all(), 'nama_sekolah', 'schools_id')
                 ->sortable(),
 
             Column::make('Created at', 'created_at', 'users.created_at')

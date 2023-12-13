@@ -71,6 +71,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/location/edit', [LocationController::class, 'edit'])->name('location.edit');
     });
 
+    Route::middleware('role:dosen')->name('dosen.')->group(function () {
+        Route::get('/dosen', [DosenController::class, 'index'])->name('index');
+        Route::get('/dosen/{user}', [DosenController::class, 'show'])->name('show');
+        Route::get('/dosen/{user}/rekap-absensi', [DosenController::class, 'rekapAbsensiMahasiswa'])->name('rekap-absensi');
+    });
+
     Route::middleware('role:user')->name('home.')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('index');
         // desctination after scan qrcode
@@ -79,10 +85,6 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/absensi/{attendance}', [HomeController::class, 'show'])->name('show');
         Route::get('/absensi/{attendance}/permission', [HomeController::class, 'permission'])->name('permission');
-    });
-
-    Route::middleware('role:dosen')->name('home.')->group(function () {
-        Route::get('/', [DosenController::class, 'index'])->name('index');
     });
 
     Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout');

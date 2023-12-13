@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
+use App\Models\User;
+use App\Models\Presence;
 use Illuminate\Http\Request;
 
 class DosenController extends Controller
@@ -13,8 +16,33 @@ class DosenController extends Controller
      */
     public function index()
     {
-        return view('holidays.index', [
-            "title" => "Beranda"
+        // $attendances = Attendance::all()->sortByDesc('data.is_end')->sortByDesc('data.is_start');
+        $users = User::all()->sortByDesc('data.is_end')->sortByDesc('data.is_start');
+
+        $currentUser = auth()->user();
+
+        // Mengambil pengguna lain dengan sekolah yang sama
+        $usersWithSameSchool = User::where('schools_id', $currentUser->schools_id)
+            ->where('id', '!=', $currentUser->id)
+            ->get();
+
+        // return view('users.show_users', compact('usersWithSameSchool'));
+
+        return view('dosen.index', [
+            "title" => "Data Kehadiran Siswa",
+            "usersWithSameSchool" => $usersWithSameSchool
+        ]);
+    }
+
+    public function rekapAbsensiMahasiswa($userId)
+    {
+        $user = User::findOrFail($userId);
+        $presences = Presence::where('user_id', $user->id)->get();
+
+        return view('dosen.rekap_absensi', [
+            "title" => "Data Kehadiran Siswa",
+            'user' => $user,
+            'presences' => $presences,
         ]);
     }
 
@@ -45,9 +73,16 @@ class DosenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function show()
     {
-        //
+        // $attendance->load(['positions', 'presences']);
+
+        // dd($qrcode);
+        return view('dosen.show', [
+            "title" => "Data Detail Kehadiran",
+            // "attendance" => $attendance,
+        ]);
     }
 
     /**

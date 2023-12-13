@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Position;
 use App\Models\Role;
+use App\Models\School;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,12 +19,15 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
         $this->call(PositionSeeder::class);
+        $this->call(SchoolTableSeeder::class);
 
         \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin1@gmail.com',
             'role_id' => Role::where('name', 'admin')->first('id'),
             'position_id' => Position::where('name', 'admin')->first('id'),
+            'schools_id' => School::where('nama_sekolah', 'admin')->first('id'),
+            // 'schools_id' => null,
         ]);
         // \App\Models\User::factory(0)->create([
         //     'role_id' => Role::where('name', 'user')->first('id'), // user === employee

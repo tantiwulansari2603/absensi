@@ -21,9 +21,13 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) { // login gagal
             request()->session()->regenerate();
+            $redirectRoute = auth()->user()->isUser()
+                ? route('home.index')
+                : (auth()->user()->isDosen() ? route('dosen.index') : route('dashboard.index'));
+
             $data = [
                 "success" => true,
-                "redirect_to" => auth()->user()->isUser() ? route('home.index') : route('dashboard.index'),
+                "redirect_to" => $redirectRoute,
                 "message" => "Login berhasil, silahkan tunggu!"
             ];
             return response()->json($data);

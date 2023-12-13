@@ -2,12 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Position;
-use App\Models\Role;
-use App\Models\User;
+use App\Models\School;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Scope;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
@@ -17,7 +16,7 @@ final class SchoolTable extends PowerGridComponent
     use ActionButton;
 
     //Table sort field
-    public string $sortField = 'users.created_at';
+    public string $sortField = 'schools.created_at';
     public string $sortDirection = 'desc';
 
     protected function getListeners()
@@ -53,13 +52,9 @@ final class SchoolTable extends PowerGridComponent
             if (!$ids)
                 return $this->dispatchBrowserEvent('showToast', ['success' => false, 'message' => 'Pilih data yang ingin dihapus terlebih dahulu.']);
 
-            if (in_array(auth()->user()->id, $ids))
-                return $this->dispatchBrowserEvent('showToast', ['success' => false, 'message' => 'Anda tidak diizinkan untuk menghapus data yang sedang anda gunakan untuk login.']);
-
-
             try {
-                User::whereIn('id', $ids)->delete();
-                $this->dispatchBrowserEvent('showToast', ['success' => true, 'message' => 'Data karyawaan berhasi dihapus.']);
+                School::whereIn('id', $ids)->delete();
+                $this->dispatchBrowserEvent('showToast', ['success' => true, 'message' => 'Data sekolah berhasi dihapus.']);
             } catch (\Illuminate\Database\QueryException $ex) {
                 $this->dispatchBrowserEvent('showToast', ['success' => false, 'message' => 'Data gagal dihapus, kemungkinan ada data lain yang menggunakan data tersebut.']);
             }
@@ -76,7 +71,7 @@ final class SchoolTable extends PowerGridComponent
 
             $ids = join('-', $ids);
             // return redirect(route('employees.edit', ['ids' => $ids])); // tidak berfungsi/menredirect
-            return $this->dispatchBrowserEvent('redirect', ['url' => route('employees.edit', ['ids' => $ids])]);
+            return $this->dispatchBrowserEvent('redirect', ['url' => route('school.edit', ['ids' => $ids])]);
         }
     }
 
@@ -113,14 +108,12 @@ final class SchoolTable extends PowerGridComponent
     /**
      * PowerGrid datasource.
      *
-     * @return Builder<\App\Models\User>
+     * @return Builder<\App\Models\School>
      */
+
     public function datasource(): Builder
     {
-        return User::query()
-            ->join('roles', 'users.role_id', '=', 'roles.id')
-            ->join('positions', 'users.position_id', '=', 'positions.id')
-            ->select('users.*', 'roles.name as role', 'positions.name as position');
+        return School::query()->latest();
     }
 
     /*
@@ -153,17 +146,9 @@ final class SchoolTable extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             // ->addColumn('id')
-            ->addColumn('name')
-            ->addColumn('email')
-            ->addColumn('phone')
-            ->addColumn('role', function (User $model) {
-                return ucfirst($model->role);
-            })
-            ->addColumn('position', function (User $model) {
-                return ucfirst($model->position);
-            })
+            ->addColumn('nama_sekolah')
             ->addColumn('created_at')
-            ->addColumn('created_at_formatted', fn (User $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+            ->addColumn('created_at_formatted', fn (School $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
     /*
@@ -187,36 +172,16 @@ final class SchoolTable extends PowerGridComponent
             //     ->searchable()
             //     ->sortable(),
 
-            Column::make('Name', 'name', 'users.name')
+            Column::make('Nama Sekolah', 'nama_sekolah', 'schools.nama_sekolah')
                 ->searchable()
                 ->makeInputText()
                 ->editOnClick()
                 ->sortable(),
 
-            Column::make('Email', 'email', 'users.email')
-                ->searchable()
-                ->makeInputText()
-                ->sortable(),
-
-            Column::make('No. Telp', 'phone', 'users.phone')
-                ->searchable()
-                ->makeInputText()
-                ->sortable(),
-
-            Column::make('Jabatan', 'position', 'positions.name')
-                ->searchable()
-                ->makeInputSelect(Position::all(), 'name', 'position_id')
-                ->sortable(),
-
-            Column::make('Role', 'role', 'roles.name')
-                ->searchable()
-                ->makeInputSelect(Role::all(), 'name', 'role_id')
-                ->sortable(),
-
-            Column::make('Created at', 'created_at', 'users.created_at')
+            Column::make('Created at', 'created_at', 'schools.created_at')
                 ->hidden(),
 
-            Column::make('Created at', 'created_at_formatted', 'users.created_at')
+            Column::make('Created at', 'created_at_formatted', 'schools.created_at')
                 ->makeInputDatePicker()
                 ->searchable()
         ];

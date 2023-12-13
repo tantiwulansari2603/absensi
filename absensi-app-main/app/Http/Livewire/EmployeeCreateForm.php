@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Position;
 use App\Models\Role;
+use App\Models\School;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
@@ -14,19 +15,21 @@ class EmployeeCreateForm extends Component
     public $employees;
     public Collection $roles;
     public Collection $positions;
+    public Collection $schools;
 
     public function mount()
     {
         $this->positions = Position::all();
         $this->roles = Role::all();
+        $this->schools = School::all();
         $this->employees = [
-            ['name' => '', 'email' => '', 'phone' => '', 'password' => '', 'role_id' => User::USER_ROLE_ID, 'position_id' => $this->positions->first()->id]
+            ['name' => '', 'email' => '', 'phone' => '', 'password' => '', 'role_id' => User::USER_ROLE_ID, 'position_id' => $this->positions->first()->id, 'schools_id' => $this->schools->first()->id]
         ];
     }
 
     public function addEmployeeInput(): void
     {
-        $this->employees[] = ['name' => '', 'email' => '', 'phone' => '', 'password' => '', 'role_id' => User::USER_ROLE_ID, 'position_id' => $this->positions->first()->id];
+        $this->employees[] = ['name' => '', 'email' => '', 'phone' => '', 'password' => '', 'role_id' => User::USER_ROLE_ID, 'position_id' => $this->positions->first()->id, 'schools_id' => $this->schools->first()->id];
     }
 
     public function removeEmployeeInput(int $index): void
@@ -40,6 +43,7 @@ class EmployeeCreateForm extends Component
         // cara lebih cepat, dan kemungkinan data role tidak akan diubah/ditambah
         $roleIdRuleIn = join(',', $this->roles->pluck('id')->toArray());
         $positionIdRuleIn = join(',', $this->positions->pluck('id')->toArray());
+        $schoolIdRuleIn = join(',', $this->schools->pluck('id')->toArray());
         // $roleIdRuleIn = join(',', Role::all()->pluck('id')->toArray());
 
         // setidaknya input pertama yang hanya required,
@@ -51,7 +55,9 @@ class EmployeeCreateForm extends Component
             'employees.*.password' => '',
             'employees.*.role_id' => 'required|in:' . $roleIdRuleIn,
             'employees.*.position_id' => 'required|in:' . $positionIdRuleIn,
+            'employees.*.schools_id' => 'required|in:' . $schoolIdRuleIn,
         ]);
+
         // cek apakah no. telp yang diinput unique
         $phoneNumbers = array_map(function ($employee) {
             return trim($employee['phone']);

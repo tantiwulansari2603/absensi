@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\School;
 use Illuminate\Http\Request;
 
 class SchoolController extends Controller
@@ -29,13 +29,13 @@ class SchoolController extends Controller
         $ids = explode('-', $ids);
 
         // ambil data user yang hanya memiliki User::USER_ROLE_ID / role untuk karyawaan
-        $employees = User::query()
+        $school = School::query()
             ->whereIn('id', $ids)
             ->get();
 
         return view('school.edit', [
             "title" => "Edit Data Sekolah",
-            "school" => $employees
+            "school" => $school
         ]);
     }
 }

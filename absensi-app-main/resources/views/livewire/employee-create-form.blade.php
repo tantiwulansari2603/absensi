@@ -53,6 +53,17 @@
                         </select>
                         <x-form-error key="employees.{{ $i }}.role_id" />
                     </div>
+                    <div class="mb-3">
+                        <x-form-label id="schools_id{{ $i }}" label='Sekolah {{ $i + 1 }}' />
+                        <select class="form-select" aria-label="Default select example" name="schools_id"
+                            wire:model.defer="employees.{{ $i }}.schools_id">
+                            <option selected disabled>-- Pilih Sekolah --</option>
+                            @foreach ($schools as $school)
+                                <option value="{{ $school->id }}">{{ ucfirst($school->nama_sekolah) }}</option>
+                            @endforeach
+                        </select>
+                        <x-form-error key="employees.{{ $i }}.schools_id" />
+                    </div>
                 </div>
                 @if ($i > 0)
                     <button class="btn btn-sm btn-danger mt-2" wire:click="removeEmployeeInput({{ $i }})"

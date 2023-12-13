@@ -6,6 +6,7 @@ use App\Http\Traits\useUniqueValidation;
 use App\Models\Position;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\School;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -17,6 +18,7 @@ class EmployeeEditForm extends Component
     public $employees;
     public Collection $roles;
     public Collection $positions;
+    public Collection $schools;
 
     public function mount(Collection $employees)
     {
@@ -31,16 +33,19 @@ class EmployeeEditForm extends Component
                 'phone' => $employee->phone,
                 'original_phone' => $employee->phone, // untuk cek validasi unique nanti
                 'role_id' => $employee->role_id,
-                'position_id' => $employee->position_id
+                'position_id' => $employee->position_id,
+                'schools_id' => $employee->schools_id
             ];
         }
         $this->roles = Role::all();
         $this->positions = Position::all();
+        $this->schools = School::all();
     }
     public function saveEmployees()
     {
         $roleIdRuleIn = join(',', $this->roles->pluck('id')->toArray());
         $positionIdRuleIn = join(',', $this->positions->pluck('id')->toArray());
+        $schoolsIdRuleIn = join(',', $this->schools->pluck('id')->toArray());
 
         $this->validate([
             'employees.*.name' => 'required',
@@ -49,6 +54,7 @@ class EmployeeEditForm extends Component
             'employees.*.password' => '',
             'employees.*.role_id' => 'required|in:' . $roleIdRuleIn,
             'employees.*.position_id' => 'required|in:' . $positionIdRuleIn,
+            'employees.*.schools_id' => 'required|in:' . $schoolsIdRuleIn,
         ]);
 
         if (!$this->isUniqueOnLocal('phone', $this->employees)) {
@@ -83,6 +89,7 @@ class EmployeeEditForm extends Component
                 'phone' => $employee['phone'],
                 'role_id' => $employee['role_id'],
                 'position_id' => $employee['position_id'],
+                'schools_id' => $employee['schools_id'],
             ]);
         }
 

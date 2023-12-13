@@ -28,6 +28,7 @@ class User extends Authenticatable
         'password',
         'role_id',
         'position_id',
+        'schools_id',
         'phone',
     ];
 
@@ -58,6 +59,11 @@ class User extends Authenticatable
     public function position()
     {
         return $this->belongsTo(Position::class);
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
     }
 
     public function scopeOnlyEmployees($query)
