@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\URL;
+use App\Models\Location;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Attendance extends Model
@@ -17,6 +18,7 @@ class Attendance extends Model
 
     protected $fillable = [
         'title',
+        'lokasi_id',
         'description',
         'start_time',
         'batas_start_time',
@@ -72,5 +74,10 @@ class Attendance extends Model
     public function presences()
     {
         return $this->hasMany(Presence::class);
+    }
+
+    public function locations()
+    {
+        return $this->belongsToMany(Location::class);
     }
 }

@@ -3,32 +3,49 @@
 namespace App\Http\Livewire;
 
 use App\Models\Attendance;
+use App\Models\Location;
 use \Illuminate\Support\Str;
 
 class AttendanceCreateForm extends AttendanceAbstract
 {
     public function save()
     {
-        // filter value before validate
-        $this->position_ids = array_filter($this->position_ids, function ($id) {
-            return is_numeric($id);
-        });
+        // Filter value sebelum divalidasi
+        $this->position_ids = array_filter($this->position_ids, 'is_numeric');
+        // $this->lokasi_id = array_filter($this->lokasi_id, 'is_numeric');
+        $this->attendance['lokasi_id'] = is_array($this->attendance['lokasi_id'])
+            ? array_filter($this->attendance['lokasi_id'], 'is_numeric')
+            : [];
 
-        $position_ids = array_values($this->position_ids);
-
+        // Validasi
         $this->validate();
 
-        if (array_key_exists("code", $this->attendance) && $this->attendance['code']) // jika menggunakan qrcode
-            $this->attendance['code'] = Str::random();
+        // Inisialisasi variabel dengan nilai yang benar
+        $position_ids = $this->position_ids;
+        // $lokasi_id = $this->lokasi_id;
+        $lokasi_id = $this->attendance['lokasi_id'];
 
-        $attendance = Attendance::create($this->attendance);
+        if (empty($lokasi_id)) {
+            $lokasi_id = 1; // Gantilah dengan nilai default yang sesuai
+        }
+
+        if (array_key_exists('code', $this->attendance[0]) && $this->attendance[0]['code']) {
+            // Jika menggunakan qrcode
+            $this->attendance[0]['code'] = Str::random();
+        }
+
+        $attendance = Attendance::create($this->attendance[0]);
         $attendance->positions()->attach($position_ids);
+        $attendance->locations()->attach($lokasi_id);
 
-        redirect()->route('attendances.index')->with('success', "Data absensi berhasil ditambahkan.");
+        return redirect()->route('attendances.index')->with('success', 'Data absensi berhasil ditambahkan.');
     }
+
 
     public function render()
     {
-        return view('livewire.attendance-create-form');
+        $locations = Location::all();
+
+        return view('livewire.attendance-create-form', ['locations' => $locations]);
     }
 }
