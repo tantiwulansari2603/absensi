@@ -24,6 +24,7 @@
             <thead>
                 <tr>
                     <th>Tanggal</th>
+                    <th>Nama Absensi</th>
                     <th>Masuk</th>
                     <th>Pulang</th>
                 </tr>
@@ -32,6 +33,7 @@
                 @forelse ($presences as $presence)
                     <tr>
                         <td>{{ $presence->presence_date }}</td>
+                        <td>{{ $presence->attendance->title }}</td>
                         <td>{{ $presence->presence_enter_time }}</td>
                         <td>{{ $presence->presence_out_time }}</td>
                     </tr>
