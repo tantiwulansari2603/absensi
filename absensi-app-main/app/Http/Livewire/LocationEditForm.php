@@ -27,7 +27,7 @@ class LocationEditForm extends Component
     public function saveLocations()
     {
         // tidak mengimplementasikan validasi, karena jika input kosong berarti data tersebut tidak akan diubah
-        // ambil input/request dari position yang berisi
+        // ambil input/request dari location yang berisi
         $locations = array_filter($this->locations, function ($a) {
             return trim($a['nama']) !== "";
         });

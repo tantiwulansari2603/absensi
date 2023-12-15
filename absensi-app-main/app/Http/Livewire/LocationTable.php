@@ -61,8 +61,12 @@ final class LocationTable extends PowerGridComponent
         if (auth()->check()) {
             $ids = $this->checkedValues();
 
-            if (!$ids)
-                return $this->dispatchBrowserEvent('showToast', ['success' => false, 'message' => 'Pilih data yang ingin diedit terlebih dahulu.']);
+            if (!$ids || count($ids) != 1) {
+                return $this->dispatchBrowserEvent('showToast', [
+                    'success' => false,
+                    'message' => 'Pilih salah satu data yang ingin diedit.'
+                ]);
+            }
 
             $ids = join('-', $ids);
             // return redirect(route('positions.edit', ['ids' => $ids])); // tidak berfungsi/menredirect
