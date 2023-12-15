@@ -14,24 +14,24 @@
             </div>
             <div class="mb-3">
                 <x-form-label id="lokasi_id" label='Lokasi' />
-                <select class="form-select" aria-label="Default select example" name="lokasi_id" wire:model="lokasi_id">
-                    <option selected disabled>-- Pilih Lokasi --</option>
+                <select id="lokasi_id" name="lokasi_id" wire:model.defer="attendance.lokasi_id" class="form-select">
+                    <option value="">Pilih Lokasi</option>
                     @foreach ($locations as $location)
-                    <option value="{{ $location->id }}">{{ ucfirst($location->nama) }}</option>
+                        <option value="{{ $location->id }}">{{ $location->nama }}</option>
                     @endforeach
                 </select>
-                <x-form-error key="lokasi_id" />
-            </div>
+                <x-form-error key="attendance.lokasi_id" />
+            </div>            
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md-6">
                         <x-form-label id="start_time" label='Waktu Absen Masuk' />
-                        <x-form-input type="text" maxlength="5" id="start_time" name="start_time" wire:model.defer="attendance.start_time" placeholder="07:00" />
+                        <x-form-input type="text" maxlength="5" id="start_time" name="start_time" wire:model.defer="attendance.start_time" placeholder="07:45" />
                         <x-form-error key="attendance.start_time" />
                     </div>
                     <div class="col-md-6">
                         <x-form-label id="batas_start_time" label='Batas Waktu Absen Masuk' />
-                        <x-form-input type="text" maxlength="5" id="batas_start_time" name="batas_start_time" wire:model.defer="attendance.batas_start_time" />
+                        <x-form-input type="text" maxlength="5" id="batas_start_time" name="batas_start_time" wire:model.defer="attendance.batas_start_time" placeholder="08:15"/>
                         <x-form-error key="attendance.batas_start_time" />
                     </div>
                 </div>
@@ -41,12 +41,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <x-form-label id="end_time" label='Waktu Absen Pulang' />
-                        <x-form-input type="text" maxlength="5" id="end_time" name="end_time" wire:model.defer="attendance.end_time" />
+                        <x-form-input type="text" maxlength="5" id="end_time" name="end_time" wire:model.defer="attendance.end_time" placeholder="17:00"/>
                         <x-form-error key="attendance.end_time" />
                     </div>
                     <div class="col-md-6">
                         <x-form-label id="batas_end_time" label='Batas Waktu Absen Pulang' />
-                        <x-form-input type="text" maxlength="5" id="batas_end_time" name="batas_end_time" wire:model.defer="attendance.batas_end_time" />
+                        <x-form-input type="text" maxlength="5" id="batas_end_time" name="batas_end_time" wire:model.defer="attendance.batas_end_time" placeholder="18:00"/>
                         <x-form-error key="attendance.batas_end_time" />
                     </div>
                 </div>

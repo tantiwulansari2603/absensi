@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Location;
 use App\Models\Position;
+use App\Models\Location;
 use Livewire\Component;
 
 class AttendanceAbstract extends Component
@@ -12,7 +12,6 @@ class AttendanceAbstract extends Component
     public $positions;
     public $position_ids = [];
     public $locations;
-    public $lokasi_id = [];
 
     protected $rules = [
         'attendance.title' => 'required|string|min:6',
@@ -22,31 +21,14 @@ class AttendanceAbstract extends Component
         'attendance.end_time' => 'required|date_format:H:i',
         'attendance.batas_end_time' => 'required|date_format:H:i|after:end_time',
         'attendance.code' => 'sometimes|nullable|boolean',
+        'attendance.lokasi_id' => 'required|exists:locations,id',
         'position_ids' => 'required|array',
-        "position_ids.*"  => "required|distinct|numeric",
-        'attendance.lokasi_id' => 'required|array',
-        'attendance.lokasi_id.*'  => 'required|distinct|numeric',
+        'position_ids.*' => 'required|distinct|numeric',
     ];
 
     public function mount()
     {
         $this->positions = Position::query()->select(['id', 'name'])->get();
-        $this->locations = Location::all();
-
-        $this->lokasi_id = $this->locations->pluck('id', 'nama')->toArray();
-
-        $this->attendance = [
-            [
-                'title' => '',
-                'description' => '',
-                'start_time' => '',
-                'batas_start_time' => '',
-                'end_time' => '',
-                'batas_end_time' => '',
-                'code' => '',
-                'position_id' => $this->positions->first()->id,
-                'lokasi_id' => $this->locations->first()->id
-            ]
-        ];
+        $this->locations = Location::query()->select(['id', 'nama'])->get();
     }
 }

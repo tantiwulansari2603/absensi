@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\URL;
-use App\Models\Location;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Attendance extends Model
@@ -18,8 +17,8 @@ class Attendance extends Model
 
     protected $fillable = [
         'title',
-        'lokasi_id',
         'description',
+        'lokasi_id',
         'start_time',
         'batas_start_time',
         'end_time',
@@ -36,10 +35,8 @@ class Attendance extends Model
                 $now = now();
                 $startTime = Carbon::parse($this->start_time);
                 $batasStartTime = Carbon::parse($this->batas_start_time);
-
                 $endTime = Carbon::parse($this->end_time);
                 $batasEndTime = Carbon::parse($this->batas_end_time);
-
                 $isHolidayToday = Holiday::query()
                     ->where('holiday_date', now()->toDateString())
                     ->get();
@@ -76,8 +73,8 @@ class Attendance extends Model
         return $this->hasMany(Presence::class);
     }
 
-    public function locations()
+    public function location()
     {
-        return $this->belongsToMany(Location::class);
+        return $this->belongsTo(Location::class, 'lokasi_id');
     }
 }
