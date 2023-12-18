@@ -46,11 +46,11 @@
     </form>
     <script>
         document.addEventListener('livewire:load', function() {
-            var map = L.map('map').setView([-7.488679253144124, 112.46195241611329], 15);
+            var map = L.map('map').setView([-7.482959411212185, 112.44929768865548], 15);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-            var marker = L.marker([-7.488679253144124, 112.46195241611329], {
+            var marker = L.marker([-7.482959411212185, 112.44929768865548], {
                 draggable: true
             }).addTo(map);
 

@@ -27,6 +27,9 @@
                     <h5 class="card-title">{{ $attendance->title }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ $attendance->description }}</h6>
                     <div class="d-flex align-items-center gap-2">
+                        @if($attendance->location)
+                            <span class="badge rounded-pill bg-secondary">{{ $attendance->location->nama }}</span>
+                        @endif
                         @include('partials.attendance-badges')
                         <a href="{{ route('presences.permissions', $attendance->id) }}" class="badge rounded-pill bg-info">Karyawaan
                             Izin</a>
