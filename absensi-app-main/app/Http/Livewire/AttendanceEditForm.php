@@ -49,6 +49,7 @@ class AttendanceEditForm extends AttendanceAbstract
         }
 
         $this->attendance->update($attendance);
+        $this->attendance->location()->associate($this->attendance['lokasi_id']);
         $this->attendance->positions()->sync($position_ids);
 
         redirect()->route('attendances.index')->with('success', "Data absensi berhasil diubah.");

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Attendance;
+use App\Models\Location;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
@@ -93,7 +94,9 @@ final class AttendanceTable extends PowerGridComponent
      */
     public function datasource(): Builder
     {
-        return Attendance::query();
+        return Attendance::query()
+            ->join('locations', 'attendances.lokasi_id', '=', 'locations.id')
+            ->select('attendances.*', 'locations.nama as location');
     }
 
     /*
@@ -128,6 +131,9 @@ final class AttendanceTable extends PowerGridComponent
             // ->addColumn('id')
             ->addColumn('title')
             ->addColumn('description')
+            ->addColumn('location', function (Attendance $model) {
+                return ucfirst($model->location);
+            })
             ->addColumn('start_time', fn (Attendance $model) => substr($model->start_time, 0, -3) . "-" . substr($model->batas_start_time, 0, -3))
             ->addColumn('end_time', fn (Attendance $model) => substr($model->end_time, 0, -3) . "-" . substr($model->batas_end_time, 0, -3))
             // ->addColumn('batas_start_time')
@@ -164,6 +170,11 @@ final class AttendanceTable extends PowerGridComponent
                 ->sortable(),
 
             Column::make('Keterangan', 'description'),
+
+            Column::make('Lokasi', 'location', 'locations.nama')
+                ->searchable()
+                ->makeInputSelect(Location::all(), 'nama', 'lokasi_id')
+                ->sortable(),
 
             Column::make('Waktu Absen Masuk', 'start_time', 'start_time')
                 ->searchable()
