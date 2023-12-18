@@ -24,16 +24,6 @@
                                     </a>
                                 @endif
                             @endforeach
-
-                            {{-- Loop untuk pengguna dengan lokasi yang sama --}}
-                            @foreach ($datas['usersWithSameLocation'] as $user)
-                                {{-- Tampilkan informasi pengguna dengan cara yang diinginkan --}}
-                                @if ($user->id != auth()->user()->id)
-                                    <a href="{{ route('home.showUser', $user->id) }}" class="list-group-item">
-                                        {{ $user->name }}
-                                    </a>
-                                @endif
-                            @endforeach
                         </ul>
                     </div>
                 </div>
