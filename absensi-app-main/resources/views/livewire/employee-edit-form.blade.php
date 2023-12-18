@@ -63,6 +63,17 @@
                         </select>
                         <x-form-error key="employees.{{ $loop->index }}.schools_id" />
                     </div>
+                    <div class="mb-3">
+                        <x-form-label id="locations_id{{ $employee['id'] }}" label='Kantor {{ $loop->iteration }}' />
+                        <select class="form-select" aria-label="Default select example" name="locations_id"
+                            wire:model.defer="employees.{{ $loop->index }}.locations_id">
+                            <option selected disabled>-- Pilih Kantor --</option>
+                            @foreach ($locations as $location)
+                                <option value="{{ $location->id }}">{{ ucfirst($location->nama) }}</option>
+                            @endforeach
+                        </select>
+                        <x-form-error key="employees.{{ $loop->index }}.locations_id" />
+                    </div>
                 </div>
             </div>
             <hr>

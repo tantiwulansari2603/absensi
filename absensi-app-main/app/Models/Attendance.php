@@ -77,4 +77,9 @@ class Attendance extends Model
     {
         return $this->belongsTo(Location::class, 'lokasi_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

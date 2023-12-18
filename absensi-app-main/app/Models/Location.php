@@ -10,4 +10,9 @@ class Location extends Model
     use HasFactory;
 
     protected $fillable = ['nama', 'alamat', 'latitude', 'longitude'];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

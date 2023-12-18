@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Location;
 use App\Models\Position;
 use App\Models\Role;
 use App\Models\School;
@@ -16,20 +17,22 @@ class EmployeeCreateForm extends Component
     public Collection $roles;
     public Collection $positions;
     public Collection $schools;
+    public Collection $locations;
 
     public function mount()
     {
         $this->positions = Position::all();
         $this->roles = Role::all();
         $this->schools = School::all();
+        $this->locations = Location::all();
         $this->employees = [
-            ['name' => '', 'email' => '', 'phone' => '', 'password' => '', 'role_id' => User::USER_ROLE_ID, 'position_id' => $this->positions->first()->id, 'schools_id' => $this->schools->first()->id]
+            ['name' => '', 'email' => '', 'phone' => '', 'password' => '', 'role_id' => User::USER_ROLE_ID, 'position_id' => $this->positions->first()->id, 'schools_id' => $this->schools->first()->id, 'locations_id' => $this->locations->first()->id]
         ];
     }
 
     public function addEmployeeInput(): void
     {
-        $this->employees[] = ['name' => '', 'email' => '', 'phone' => '', 'password' => '', 'role_id' => User::USER_ROLE_ID, 'position_id' => $this->positions->first()->id, 'schools_id' => $this->schools->first()->id];
+        $this->employees[] = ['name' => '', 'email' => '', 'phone' => '', 'password' => '', 'role_id' => User::USER_ROLE_ID, 'position_id' => $this->positions->first()->id, 'schools_id' => $this->schools->first()->id, 'locations_id' => $this->locations->first()->id];
     }
 
     public function removeEmployeeInput(int $index): void
@@ -44,6 +47,7 @@ class EmployeeCreateForm extends Component
         $roleIdRuleIn = join(',', $this->roles->pluck('id')->toArray());
         $positionIdRuleIn = join(',', $this->positions->pluck('id')->toArray());
         $schoolIdRuleIn = join(',', $this->schools->pluck('id')->toArray());
+        $locationIdRuleIn = join(',', $this->locations->pluck('id')->toArray());
         // $roleIdRuleIn = join(',', Role::all()->pluck('id')->toArray());
 
         // setidaknya input pertama yang hanya required,
@@ -56,6 +60,7 @@ class EmployeeCreateForm extends Component
             'employees.*.role_id' => 'required|in:' . $roleIdRuleIn,
             'employees.*.position_id' => 'required|in:' . $positionIdRuleIn,
             'employees.*.schools_id' => 'required|in:' . $schoolIdRuleIn,
+            'employees.*.locations_id' => 'required|in:' . $locationIdRuleIn,
         ]);
 
         // cek apakah no. telp yang diinput unique

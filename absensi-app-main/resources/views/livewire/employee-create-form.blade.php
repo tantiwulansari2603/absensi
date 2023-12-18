@@ -64,6 +64,17 @@
                         </select>
                         <x-form-error key="employees.{{ $i }}.schools_id" />
                     </div>
+                    <div class="mb-3">
+                        <x-form-label id="locations_id{{ $i }}" label='Kantor {{ $i + 1 }}' />
+                        <select class="form-select" aria-label="Default select example" name="locations_id"
+                            wire:model.defer="employees.{{ $i }}.locations_id">
+                            <option selected disabled>-- Pilih Kantor --</option>
+                            @foreach ($locations as $location)
+                                <option value="{{ $location->id }}">{{ ucfirst($location->nama) }}</option>
+                            @endforeach
+                        </select>
+                        <x-form-error key="employees.{{ $i }}.locations_id" />
+                    </div>
                 </div>
                 @if ($i > 0)
                     <button class="btn btn-sm btn-danger mt-2" wire:click="removeEmployeeInput({{ $i }})"

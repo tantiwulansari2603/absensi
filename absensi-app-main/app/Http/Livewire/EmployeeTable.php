@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Location;
 use App\Models\Position;
 use App\Models\Role;
 use App\Models\School;
@@ -122,7 +123,8 @@ final class EmployeeTable extends PowerGridComponent
             ->join('roles', 'users.role_id', '=', 'roles.id')
             ->join('positions', 'users.position_id', '=', 'positions.id')
             ->join('schools', 'users.schools_id', '=', 'schools.id')
-            ->select('users.*', 'roles.name as role', 'positions.name as position', 'schools.nama_sekolah as school');
+            ->join('locations', 'users.locations_id', '=', 'locations.id')
+            ->select('users.*', 'roles.name as role', 'positions.name as position', 'schools.nama_sekolah as school', 'locations.nama as location');
     }
 
     /*
@@ -167,6 +169,9 @@ final class EmployeeTable extends PowerGridComponent
             })
             ->addColumn('school', function (User $model) {
                 return ucfirst($model->school);
+            })
+            ->addColumn('location', function (User $model) {
+                return ucfirst($model->location);
             })
             ->addColumn('created_at')
             ->addColumn('created_at_formatted', fn (User $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
@@ -222,6 +227,11 @@ final class EmployeeTable extends PowerGridComponent
             Column::make('Sekolah', 'school', 'schools.nama_sekolah')
                 ->searchable()
                 ->makeInputSelect(School::all(), 'nama_sekolah', 'schools_id')
+                ->sortable(),
+
+            Column::make('Kantor', 'location', 'locations.nama')
+                ->searchable()
+                ->makeInputSelect(Location::all(), 'nama', 'locations_id')
                 ->sortable(),
 
             Column::make('Created at', 'created_at', 'users.created_at')

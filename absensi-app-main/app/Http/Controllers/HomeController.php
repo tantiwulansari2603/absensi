@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\Holiday;
+use App\Models\Location;
 use App\Models\Permission;
 use App\Models\Presence;
+use App\Models\User;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 
@@ -13,16 +15,29 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $currentUser = auth()->user();
         $attendances = Attendance::query()
             // ->with('positions')
             ->forCurrentUser(auth()->user()->position_id)
+            ->where('lokasi_id', auth()->user()->locations_id)
             ->get()
             ->sortByDesc('data.is_end')
             ->sortByDesc('data.is_start');
 
-        return view('home.index', [
+        $usersWithSameLocation = User::where('locations_id', auth()->user()->locations_id)
+            ->where('id', '!=', auth()->user()->id)
+            ->get();
+
+        // return view('users.show_users', compact('usersWithSameSchool'));
+        $datas = [
             "title" => "Beranda",
-            "attendances" => $attendances
+            "attendances" => $attendances,
+            "usersWithSameLocation" => $usersWithSameLocation,
+        ];
+
+
+        return view('home.index', [
+            "datas" => $datas
         ]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Http\Traits\useUniqueValidation;
+use App\Models\Location;
 use App\Models\Position;
 use App\Models\Role;
 use App\Models\User;
@@ -19,6 +20,7 @@ class EmployeeEditForm extends Component
     public Collection $roles;
     public Collection $positions;
     public Collection $schools;
+    public Collection $locations;
 
     public function mount(Collection $employees)
     {
@@ -34,18 +36,21 @@ class EmployeeEditForm extends Component
                 'original_phone' => $employee->phone, // untuk cek validasi unique nanti
                 'role_id' => $employee->role_id,
                 'position_id' => $employee->position_id,
-                'schools_id' => $employee->schools_id
+                'schools_id' => $employee->schools_id,
+                'locations_id' => $employee->locations_id
             ];
         }
         $this->roles = Role::all();
         $this->positions = Position::all();
         $this->schools = School::all();
+        $this->locations = Location::all();
     }
     public function saveEmployees()
     {
         $roleIdRuleIn = join(',', $this->roles->pluck('id')->toArray());
         $positionIdRuleIn = join(',', $this->positions->pluck('id')->toArray());
         $schoolsIdRuleIn = join(',', $this->schools->pluck('id')->toArray());
+        $locationsIdRuleIn = join(',', $this->locations->pluck('id')->toArray());
 
         $this->validate([
             'employees.*.name' => 'required',
@@ -55,6 +60,7 @@ class EmployeeEditForm extends Component
             'employees.*.role_id' => 'required|in:' . $roleIdRuleIn,
             'employees.*.position_id' => 'required|in:' . $positionIdRuleIn,
             'employees.*.schools_id' => 'required|in:' . $schoolsIdRuleIn,
+            'employees.*.locations_id' => 'required|in:' . $locationsIdRuleIn,
         ]);
 
         if (!$this->isUniqueOnLocal('phone', $this->employees)) {
@@ -90,6 +96,7 @@ class EmployeeEditForm extends Component
                 'role_id' => $employee['role_id'],
                 'position_id' => $employee['position_id'],
                 'schools_id' => $employee['schools_id'],
+                'locations_id' => $employee['locations_id'],
             ]);
         }
 
