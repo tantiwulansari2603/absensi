@@ -23,6 +23,7 @@ class DosenController extends Controller
 
         // Mengambil pengguna lain dengan sekolah yang sama
         $usersWithSameSchool = User::where('schools_id', $currentUser->schools_id)
+            ->where('role_id', User::USER_ROLE_ID)
             ->where('id', '!=', $currentUser->id)
             ->get();
 
