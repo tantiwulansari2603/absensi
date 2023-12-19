@@ -84,7 +84,7 @@ class EmployeeCreateForm extends Component
             $affected++;
         }
 
-        redirect()->route('employees.index')->with('success', "Ada ($affected) data karyawaan yang berhasil ditambahkan.");
+        redirect()->route('employees.index')->with('success', "Ada ($affected) data user yang berhasil ditambahkan.");
     }
 
     public function render()

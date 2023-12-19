@@ -21,9 +21,9 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3>Jabatan / Posisi</h3>
+                    <h3>Posisi</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Jabatan / Posisi</a></li>
+                        <li class="breadcrumb-item"><a href="#">Posisi</a></li>
                     </ol>
                 </div>
                 <div class="col-sm-6">
@@ -32,7 +32,7 @@
                             <div>
                                 <a href="{{ route('positions.create') }}" class="btn btn-sm btn-primary">
                                     <span data-feather="plus-circle" class="align-text-bottom me-1"></span>
-                                    Tambah Data Jabatan
+                                    Tambah Data Posisi
                                 </a>
                             </div>
                         </div>

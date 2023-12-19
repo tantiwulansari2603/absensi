@@ -12,13 +12,11 @@
 
         @foreach ($positions as $i => $position)
         <div class="mb-3 position-relative">
-            <x-form-label id="name{{ $i }}" label='Nama Jabatan {{ $i + 1 }}' />
+            <x-form-label id="name{{ $i }}" label='Nama Posisi {{ $i + 1 }}' />
             <div class="d-flex align-items-center">
                 <x-form-input id="name{{ $i }}" name="name{{ $i }}" wire:model.defer="positions.{{ $i }}.name" />
                 @if ($i > 0)
-                <button class="btn btn-danger ms-2" wire:click="removePositionInput({{ $i }})"
-                    wire:target="removePositionInput({{ $i }})" type="button"
-                    wire:loading.attr="disabled">Hapus</button>
+                <button class="btn btn-danger ms-2" wire:click="removePositionInput({{ $i }})" wire:target="removePositionInput({{ $i }})" type="button" wire:loading.attr="disabled">Hapus</button>
                 @endif
             </div>
         </div>

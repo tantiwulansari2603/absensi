@@ -81,12 +81,12 @@ class EmployeeEditForm extends Component
 
             if (!$this->isUniqueOnDatabase($employeeBeforeUpdated, $employee, 'phone', User::class)) {
                 $this->dispatchBrowserEvent('livewire-scroll', ['top' => 0]);
-                return session()->flash('failed', "No. Telp dari data karyawaan {$employee['id']} sudah terdaftar. Silahkan masukan email yang berbeda!");
+                return session()->flash('failed', "No. Telp dari data user {$employee['id']} sudah terdaftar. Silahkan masukan email yang berbeda!");
             }
 
             if (!$this->isUniqueOnDatabase($employeeBeforeUpdated, $employee, 'email', User::class)) {
                 $this->dispatchBrowserEvent('livewire-scroll', ['top' => 0]);
-                return session()->flash('failed', "Email dari data karyawaan {$employee['id']} sudah terdaftar. Silahkan masukan email yang berbeda!");
+                return session()->flash('failed', "Email dari data user {$employee['id']} sudah terdaftar. Silahkan masukan email yang berbeda!");
             }
 
             $affected += $employeeBeforeUpdated->update([
@@ -101,7 +101,7 @@ class EmployeeEditForm extends Component
         }
 
         $message = $affected === 0 ?
-            "Tidak ada data karyawaan yang diubah." :
+            "Tidak ada data user yang diubah." :
             "Ada $affected data karyawaan yang berhasil diedit.";
 
         return redirect()->route('employees.index')->with('success', $message);

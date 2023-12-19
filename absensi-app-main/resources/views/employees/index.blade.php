@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('style')
-    @powerGridStyles
+@powerGridStyles
 @endpush
 
 <!-- @section('buttons')
@@ -16,39 +16,39 @@
 @endsection -->
 
 @section('content')
-    <div class="page-body">
-        <div class="container-fluid">
-            <div class="page-header">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h3>Karyawan</h3>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Karyawan</a></li>
-                        </ol>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="bookmark">
-                            <div class="btn-toolbar justify-content-end">
-                                <div>
-                                    <a href="{{ route('employees.create') }}" class="btn btn-sm btn-primary">
-                                        <span data-feather="plus-circle" class="align-text-bottom me-1"></span>
-                                        Tambah Data Karyawan
-                                    </a>
-                                </div>
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>User</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">User</a></li>
+                    </ol>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bookmark">
+                        <div class="btn-toolbar justify-content-end">
+                            <div>
+                                <a href="{{ route('employees.create') }}" class="btn btn-sm btn-primary">
+                                    <span data-feather="plus-circle" class="align-text-bottom me-1"></span>
+                                    Tambah Data User
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Container-fluid starts-->
-
-        @include('partials.alerts')
-        <livewire:employee-table />
     </div>
+    <!-- Container-fluid starts-->
+
+    @include('partials.alerts')
+    <livewire:employee-table />
+</div>
 @endsection
 
 @push('script')
-    <script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script>
-    @powerGridScripts
+<script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script>
+@powerGridScripts
 @endpush
