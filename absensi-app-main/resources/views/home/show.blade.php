@@ -20,12 +20,21 @@
                     substr($attendance->data->end_time, 0 , -3) }} - {{
                     substr($attendance->data->batas_end_time,0,-3 )}}</span>
             </div>
+            
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <span>Lokasi saat ini :</span>
+                    <div id="map" style="height: 275px;" wire:ignore></div>
+                </div>
+            </div>
 
-            @if (!$attendance->data->is_using_qrcode)
-                <livewire:presence-form :attendance="$attendance" :data="$data" :holiday="$holiday">
-            @else
-                @include('home.partials.qrcode-presence')
-            @endif
+            <div id="attendance-form">
+                @if (!$attendance->data->is_using_qrcode)
+                    <livewire:presence-form :attendance="$attendance" :data="$data" :holiday="$holiday">
+                @else
+                    @include('home.partials.qrcode-presence')
+                @endif
+            </div>
         </div>
         <div class="col-md-6">
             <h5 class="mb-3">Histori 30 Hari Terakhir</h5>
@@ -83,3 +92,94 @@
     </div>
 </div>
 @endsection
+@push('script')
+<script>
+document.addEventListener('livewire:load', function() {
+    var map = L.map('map');
+    var marker = L.marker([0, 0], { draggable: false }).addTo(map);
+    var locationCircle = L.circle([{{ $attendance->location->latitude }}, {{ $attendance->location->longitude }}], {
+        color: 'blue',
+        fillColor: '#3186cc',
+        fillOpacity: 0.3,
+        radius: 10 // Radius dalam meter
+    }).addTo(map);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    // Meminta izin pengguna untuk mengaktifkan lokasi
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+
+            // Atur peta ke lokasi saat ini
+            map.setView([lat, lng], 15);
+            marker.setLatLng([lat, lng]);
+
+            // Cek jarak antara koordinat pengguna dan lokasi
+            if (isWithinMaxDistance(lat, lng)) {
+                // Koordinat berada dalam radius 10 meter, izinkan akses ke form
+                enableFormAccess();
+            } else {
+                // Koordinat berada di luar radius, nonaktifkan akses ke form
+                disableFormAccess();
+            }
+        }, function(error) {
+            console.error("Error getting geolocation:", error.message);
+        });
+    } else {
+        console.error("Geolocation is not supported by this browser.");
+    }
+
+    // Menambahkan tooltip ke circle
+    locationCircle.bindTooltip("Ini merupakan lokasi tempat magang").openTooltip();
+
+    // Fungsi untuk memeriksa jarak maksimal
+    function isWithinMaxDistance(userLat, userLng) {
+        // Ambil koordinat lokasi dari tabel location
+        var locationLat = {{ $attendance->location->latitude }};
+        var locationLng = {{ $attendance->location->longitude }};
+
+        // Hitung jarak menggunakan formula haversine
+        var R = 6371; // Radius Bumi dalam kilometer
+        var dLat = toRad(locationLat - userLat);
+        var dLon = toRad(locationLng - userLng);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRad(userLat)) * Math.cos(toRad(locationLat)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var distance = R * c * 1000; // Dalam meter
+
+        // Jarak harus kurang dari atau sama dengan 10 meter
+        return distance <= 10;
+    }
+
+    // Fungsi untuk mengubah form menjadi tidak dapat diakses
+    function disableFormAccess() {
+        document.getElementById('attendance-form').style.display = 'none';
+        showAlert('Anda tidak berada di lokasi tempat magang.', 'info');
+    }
+
+    // Fungsi untuk menampilkan alert dengan jenis tertentu
+    function showAlert(message, type) {
+        var alertClass = type === 'info' ? 'alert-info' : 'alert-danger';
+        var alertElement = document.createElement('div');
+        alertElement.className = 'alert ' + alertClass;
+        alertElement.innerHTML = '<small class="fw-bold">' + message + '</small>';
+
+        // Tambahkan alert ke dalam dokumen
+        document.getElementById('map').parentNode.appendChild(alertElement);
+    }
+
+    // Fungsi untuk mengubah form menjadi dapat diakses
+    function enableFormAccess() {
+        document.getElementById('attendance-form').style.display = 'block';
+    }
+
+    // Konversi derajat menjadi radian
+    function toRad(deg) {
+        return deg * Math.PI / 180;
+    }
+});
+</script>  
+@endpush

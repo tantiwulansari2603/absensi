@@ -30,12 +30,6 @@
             </div>
             <div class="col-md-4">
                 <div class="card shadow-sm">
-                    <div class="card-body">
-                        <span>Lokasi saat ini :</span>
-                        <div id="map" style="height: 200px;" wire:ignore></div>
-                    </div>
-                </div>
-                <div class="card shadow-sm">
                     <div class="card-header">
                         Informasi Peserta Magang
                     </div>
@@ -68,31 +62,4 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('livewire:load', function() {
-            var map = L.map('map');
-            
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    
-            var marker = L.marker([0, 0], {
-                draggable: false
-            }).addTo(map);
-    
-            // Meminta izin pengguna untuk mengaktifkan lokasi
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var lat = position.coords.latitude;
-                    var lng = position.coords.longitude;
-    
-                    // Atur peta ke lokasi saat ini
-                    map.setView([lat, lng], 15);
-                    marker.setLatLng([lat, lng]);
-                }, function(error) {
-                    console.error("Error getting geolocation:", error.message);
-                });
-            } else {
-                console.error("Geolocation is not supported by this browser.");
-            }
-        });
-    </script>    
 @endsection
