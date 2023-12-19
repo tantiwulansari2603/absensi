@@ -22,10 +22,10 @@
             </div>
 
             @if (!$attendance->data->is_using_qrcode)
-            <livewire:presence-form :attendance="$attendance" :data="$data" :holiday="$holiday">
-                @else
+                <livewire:presence-form :attendance="$attendance" :data="$data" :holiday="$holiday">
+            @else
                 @include('home.partials.qrcode-presence')
-                @endif
+            @endif
         </div>
         <div class="col-md-6">
             <h5 class="mb-3">Histori 30 Hari Terakhir</h5>

@@ -19,7 +19,7 @@
 
     @if ($data['is_has_enter_today'])
     <div class="alert alert-success">
-        <small class="d-block fw-bold text-success">Anda sudah berhasil mengirim absensi masuk.</small>
+        <small class="d-block fw-bold text-white">Anda sudah berhasil mengirim absensi masuk.</small>
     </div>
     @endif
 
@@ -32,7 +32,7 @@
     {{-- sudah absen masuk dan absen pulang --}}
     @if ($data['is_has_enter_today'] && !$data['is_not_out_yet'])
     <div class="alert alert-success">
-        <small class="d-block fw-bold text-success">Anda sudah melakukan absen masuk dan absen pulang.</small>
+        <small class="d-block fw-bold text-white">Anda sudah melakukan absen masuk dan absen pulang.</small>
     </div>
     @endif
 
