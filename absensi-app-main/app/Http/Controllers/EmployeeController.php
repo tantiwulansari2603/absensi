@@ -38,4 +38,13 @@ class EmployeeController extends Controller
             "employees" => $employees
         ]);
     }
+
+    //mencoba ijin untuk ditampilkan
+    public function viewPermissions($userId)
+    {
+        $user = User::findOrFail($userId);
+        $permissions = $user->permissions()->where('is_accepted', 1)->get();
+
+        return view('user.permissions', compact('user', 'permissions'));
+    }
 }

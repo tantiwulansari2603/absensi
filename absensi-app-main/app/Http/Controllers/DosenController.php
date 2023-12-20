@@ -40,7 +40,9 @@ class DosenController extends Controller
     public function rekapAbsensiMahasiswa($userId)
     {
         $user = User::findOrFail($userId);
-        $presences = Presence::where('user_id', $user->id)->get();
+        $presences = Presence::with('permissions', 'attendance')
+            ->where('user_id', $user->id)
+            ->get();
 
         return view('dosen.rekap_absensi', [
             "title" => "Data Kehadiran Siswa",

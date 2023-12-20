@@ -20,4 +20,11 @@ class Presence extends Model
     {
         return $this->belongsTo(Attendance::class);
     }
+
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class, 'attendance_id', 'attendance_id')
+            ->where('user_id', $this->user_id)
+            ->where('is_accepted', true);
+    }
 }

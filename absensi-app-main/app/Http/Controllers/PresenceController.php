@@ -85,7 +85,7 @@ class PresenceController extends Controller
                         ->toArray()
                 ];
         } else {
-            $notPresentData = $this->getNotPresentEmployees($presences);
+            $notPresentData = $this->getNotPresentEmployees($presences, $attendance);
         }
 
 
@@ -189,8 +189,29 @@ class PresenceController extends Controller
             ->with('success', "Berhasil menerima data izin karyawan atas nama \"$user->name\".");
     }
 
-    private function getNotPresentEmployees($presences)
+    private function getNotPresentEmployees($presences, $attendance)
     {
+        // $uniquePresenceDates = $presences->unique("presence_date")->pluck('presence_date');
+        // $uniquePresenceDatesAndCompactTheUserIds = $uniquePresenceDates->map(function ($date) use ($presences) {
+        //     return [
+        //         "presence_date" => $date,
+        //         "user_ids" => $presences->where('presence_date', $date)->pluck('user_id')->toArray()
+        //     ];
+        // });
+        // $notPresentData = [];
+        // foreach ($uniquePresenceDatesAndCompactTheUserIds as $presence) {
+        //     $notPresentData[] =
+        //         [
+        //             "not_presence_date" => $presence['presence_date'],
+        //             "users" => User::query()
+        //                 ->with('position')
+        //                 ->onlyEmployees()
+        //                 ->whereNotIn('id', $presence['user_ids'])
+        //                 ->get()
+        //                 ->toArray()
+        //         ];
+        // }
+        // return $notPresentData;
         $uniquePresenceDates = $presences->unique("presence_date")->pluck('presence_date');
         $uniquePresenceDatesAndCompactTheUserIds = $uniquePresenceDates->map(function ($date) use ($presences) {
             return [
@@ -199,18 +220,22 @@ class PresenceController extends Controller
             ];
         });
         $notPresentData = [];
+
         foreach ($uniquePresenceDatesAndCompactTheUserIds as $presence) {
-            $notPresentData[] =
-                [
-                    "not_presence_date" => $presence['presence_date'],
-                    "users" => User::query()
-                        ->with('position')
-                        ->onlyEmployees()
-                        ->whereNotIn('id', $presence['user_ids'])
-                        ->get()
-                        ->toArray()
-                ];
+            $notPresentData[] = [
+                "not_presence_date" => $presence['presence_date'],
+                "users" => User::query()
+                    ->with('position')
+                    ->onlyEmployees()
+                    ->whereNotIn('id', $presence['user_ids'])
+                    ->when($attendance->location, function ($query) use ($attendance) {
+                        $query->where('locations_id', $attendance->location->id);
+                    }) // Sesuaikan dengan nama kolom yang sesuai di dalam database
+                    ->get()
+                    ->toArray()
+            ];
         }
+
         return $notPresentData;
     }
 }

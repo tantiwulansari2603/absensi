@@ -20,4 +20,9 @@ class Permission extends Model
     {
         return $this->belongsTo(Attendance::class);
     }
+
+    public function presence()
+    {
+        return $this->belongsTo(Presence::class, 'attendance_id', 'attendance_id');
+    }
 }

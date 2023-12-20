@@ -25,6 +25,7 @@
                 <tr>
                     <th>Tanggal</th>
                     <th>Nama Absensi</th>
+                    <th>Keterangan</th>
                     <th>Masuk</th>
                     <th>Pulang</th>
                 </tr>
@@ -34,6 +35,23 @@
                     <tr>
                         <td>{{ $presence->presence_date }}</td>
                         <td>{{ $presence->attendance->title }}</td>
+                        {{-- <td>{{ $presence->permission->is_permission->title }}</td> --}}
+                        {{-- {{ dd($presence) }} --}}
+                        <td>
+                            {{-- @forelse ($presence->permissions as $permission)
+                                {{ $permission->title }}
+                                @if (!$loop->last)
+                                    <br>
+                                @endif
+                            @empty
+                                N/A
+                            @endforelse --}}
+                            @forelse ($user->permissions as $permission)
+                                Izin {{ $permission->title }}
+                            @empty
+                                Masuk
+                            @endforelse
+                        </td>
                         <td>{{ $presence->presence_enter_time }}</td>
                         <td>{{ $presence->presence_out_time }}</td>
                     </tr>
@@ -44,6 +62,34 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
+
+    <!-- Menampilkan Rekapan Izin -->
+    {{-- <div class="container py-5">
+        <h2>Rekapan Izin Mahasiswa - {{ $user->name }}</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tanggal Izin</th>
+                    <th>Deskripsi Izin</th>
+                    <!-- Tambahkan kolom-kolom lain yang diperlukan -->
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($user->permissions as $permission)
+                    <tr>
+                        <td>{{ $permission->permission_date }}</td>
+                        <td>{{ $permission->description }}</td>
+                        <!-- Tambahkan kolom-kolom lain yang diperlukan -->
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="2">Belum ada data izin untuk mahasiswa ini.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table> --}}
     </div>
 @endsection
 

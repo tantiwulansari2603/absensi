@@ -72,6 +72,11 @@ class User extends Authenticatable
         return $this->belongsTo(Location::class, 'locations_id');
     }
 
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class, 'user_id', 'id')->whereNotNull('user_id');
+    }
+
     public function scopeOnlyEmployees($query)
     {
         return $query->where('role_id', self::USER_ROLE_ID);
