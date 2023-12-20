@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function index()
     {
         $apiKey = 'f71a0d13b049885f8f40b750a8c7cba2';
-        $city = 'Jakarta';
+        $city = 'Mojokerto';
         $units = 'metric';
 
         $response = Http::get("https://api.openweathermap.org/data/2.5/weather", [

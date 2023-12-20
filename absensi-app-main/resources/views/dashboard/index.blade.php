@@ -120,7 +120,7 @@
                                             <span class="ps-3" id="year"></span>
                                         </div>
                                         <div>
-                                            <p class="m-0 f-14 text-light">Indonesia </p>
+                                            <p class="m-0 f-14 text-light">Jawa Timur, Indonesia</p>
                                         </div>
                                     </div>
                                 </div>
