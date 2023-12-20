@@ -107,15 +107,25 @@
 <script>
 document.addEventListener('livewire:load', function() {
     var map = L.map('map');
-    var marker = L.marker([0, 0], { draggable: false }).addTo(map);
+    var marker = L.marker([0, 0], { draggable: false, icon: CustomIcon() }).addTo(map);
     var locationCircle = L.circle([{{ $attendance->location->latitude }}, {{ $attendance->location->longitude }}], {
-        color: 'blue',
-        fillColor: '#3186cc',
+        color: 'green',
+        fillColor: 'green',
         fillOpacity: 0.3,
         radius: 10 // Radius dalam meter
     }).addTo(map);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    // Fungsi untuk membuat ikon kustom
+    function CustomIcon() {
+        return L.icon({
+            iconUrl: '/assets/images/marker/user1.png', // Sesuaikan dengan path dan nama file ikon kantor Anda
+            iconSize: [38, 56], // Sesuaikan dengan ukuran ikon
+            iconAnchor: [19, 48], // Posisi "jatuh" dari ikon, misalnya ujung bawah tengah
+            popupAnchor: [0, -56] // Posisi pop-up yang muncul, misalnya di atas ikon
+        });
+    }
 
     // Meminta izin pengguna untuk mengaktifkan lokasi
     if ("geolocation" in navigator) {

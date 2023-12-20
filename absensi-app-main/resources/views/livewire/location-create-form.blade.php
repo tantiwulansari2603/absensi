@@ -51,8 +51,19 @@
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
             var marker = L.marker([-7.482959411212185, 112.44929768865548], {
-                draggable: true
+                draggable: true,
+                icon: CustomIcon()
             }).addTo(map);
+
+            // Fungsi untuk membuat ikon kustom
+            function CustomIcon() {
+                return L.icon({
+                    iconUrl: '/assets/images/marker/kantor2.png', // Sesuaikan dengan path dan nama file ikon kantor Anda
+                    iconSize: [38, 56], // Sesuaikan dengan ukuran ikon
+                    iconAnchor: [19, 48], // Posisi "jatuh" dari ikon, misalnya ujung bawah tengah
+                    popupAnchor: [0, -56] // Posisi pop-up yang muncul, misalnya di atas ikon
+                });
+            }
 
             function updateMarker(lat, lng) {
                 marker.setLatLng([lat, lng]);
@@ -68,7 +79,7 @@
                 var circleMarker = L.circle([lat, lng], {
                     color: 'green',
                     fillColor: 'green',
-                    fillOpacity: 0.5,
+                    fillOpacity: 0.3,
                     radius: 10
                 }).addTo(map);
 
