@@ -11,8 +11,10 @@
 
     {{-- jika belum absen dan absen masuk sudah dimulai --}}
     @if ($attendance->data->is_start && !$data['is_has_enter_today'])
-    <button class="btn btn-primary px-3 py-2 btn-sm fw-bold d-block w-100 mb-2" wire:click="sendEnterPresence"
-        wire:loading.attr="disabled" wire:target="sendEnterPresence">Masuk</button>
+    <div id="attendance-form">
+        <button class="btn btn-primary px-3 py-2 btn-sm fw-bold d-block w-100 mb-2" wire:click="sendEnterPresence"
+            wire:loading.attr="disabled" wire:target="sendEnterPresence">Masuk</button>
+    </div>
     <a href="{{ route('home.permission', $attendance->id) }}"
         class="btn btn-info px-3 py-2 btn-sm fw-bold d-block w-100">Izin</a>
     @endif
@@ -25,8 +27,10 @@
 
     {{-- jika absen pulang sudah dimulai, dan karyawan sudah absen masuk dan belum absen pulang --}}
     @if ($attendance->data->is_end && $data['is_has_enter_today'] && $data['is_not_out_yet'])
-    <button class="btn btn-primary px-3 py-2 btn-sm fw-bold d-block w-100" wire:click="sendOutPresence"
-        wire:loading.attr="disabled" wire:target="sendOutPresence">Pulang</button>
+    <div id="attendance-form">
+        <button class="btn btn-primary px-3 py-2 btn-sm fw-bold d-block w-100" wire:click="sendOutPresence"
+            wire:loading.attr="disabled" wire:target="sendOutPresence">Pulang</button>
+    </div>
     @endif
 
     {{-- sudah absen masuk dan absen pulang --}}

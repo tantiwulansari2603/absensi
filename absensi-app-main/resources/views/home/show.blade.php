@@ -28,13 +28,12 @@
                 </div>
             </div>
 
-            <div id="attendance-form">
-                @if (!$attendance->data->is_using_qrcode)
-                    <livewire:presence-form :attendance="$attendance" :data="$data" :holiday="$holiday">
-                @else
-                    @include('home.partials.qrcode-presence')
-                @endif
-            </div>
+            @if (!$attendance->data->is_using_qrcode)
+                <livewire:presence-form :attendance="$attendance" :data="$data" :holiday="$holiday">
+            @else
+                @include('home.partials.qrcode-presence')
+            @endif
+
         </div>
         <div class="col-md-6">
             <h5 class="mb-3">Histori 30 Hari Terakhir</h5>
@@ -90,6 +89,18 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="locationModalLabel">Aktifkan Lokasi Anda</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Anda perlu mengaktifkan lokasi untuk menggunakan fitur ini dan melakukan absensi. Silakan aktifkan izin lokasi pada perangkat Anda.</p>
+                </div>
+            </div>
+        </div>
+    </div>    
 </div>
 @endsection
 @push('script')
@@ -126,11 +137,20 @@ document.addEventListener('livewire:load', function() {
             }
         }, function(error) {
             console.error("Error getting geolocation:", error.message);
+            // Tampilkan modal ketika izin lokasi tidak diaktifkan
+            showLocationModal();
         });
     } else {
         console.error("Geolocation is not supported by this browser.");
+        showLocationModal();
     }
-
+    
+    // Fungsi untuk menampilkan modal terkunci
+    function showLocationModal() {
+        var locationModal = new bootstrap.Modal(document.getElementById('locationModal'), { backdrop: 'static', keyboard: false });
+        locationModal.show();
+    }
+    
     // Menambahkan tooltip ke circle
     locationCircle.bindTooltip("Ini merupakan lokasi tempat magang").openTooltip();
 
