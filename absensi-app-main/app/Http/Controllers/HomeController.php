@@ -24,7 +24,7 @@ class HomeController extends Controller
             ->sortByDesc('data.is_end')
             ->sortByDesc('data.is_start');
 
-        $usersWithSameLocation = Attendance::where('lokasi_id', auth()->user()->locations_id)
+        $usersWithSameLocation = Attendance::where('lokasi_id', $currentUser->locations_id)
             ->where('id', '!=', auth()->user()->id)
             ->get();
 

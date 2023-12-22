@@ -77,6 +77,12 @@ class User extends Authenticatable
         return $this->hasMany(Permission::class, 'user_id', 'id')->whereNotNull('user_id');
     }
 
+    // public function presences()
+    // {
+    //     return $this->hasMany(Presence::class);
+    // }
+
+
     public function scopeOnlyEmployees($query)
     {
         return $query->where('role_id', self::USER_ROLE_ID);
