@@ -43,15 +43,12 @@ class EmployeeCreateForm extends Component
 
     public function saveEmployees()
     {
-        // cara lebih cepat, dan kemungkinan data role tidak akan diubah/ditambah
         $roleIdRuleIn = join(',', $this->roles->pluck('id')->toArray());
         $positionIdRuleIn = join(',', $this->positions->pluck('id')->toArray());
         $schoolIdRuleIn = join(',', $this->schools->pluck('id')->toArray());
         $locationIdRuleIn = join(',', $this->locations->pluck('id')->toArray());
         // $roleIdRuleIn = join(',', Role::all()->pluck('id')->toArray());
 
-        // setidaknya input pertama yang hanya required,
-        // karena nanti akan difilter apakah input kedua dan input selanjutnya apakah berisi
         $this->validate([
             'employees.*.name' => 'required',
             'employees.*.email' => 'required|email|unique:users,email',
@@ -70,12 +67,10 @@ class EmployeeCreateForm extends Component
         $uniquePhoneNumbers = array_unique($phoneNumbers);
 
         if (count($phoneNumbers) != count($uniquePhoneNumbers)) {
-            // layar browser ke paling atas agar user melihat alert error
             $this->dispatchBrowserEvent('livewire-scroll', ['top' => 0]);
             return session()->flash('failed', 'Pastikan input No. Telp tidak mangandung nilai yang sama.');
         }
 
-        // alasan menggunakan create alih2 mengunakan ::insert adalah karena tidak looping untuk menambahkan created_at dan updated_at
         $affected = 0;
         foreach ($this->employees as $employee) {
             if (trim($employee['password']) === '') $employee['password'] = '123';

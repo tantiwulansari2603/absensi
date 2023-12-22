@@ -12,7 +12,7 @@ class PositionEditForm extends Component
 
     public function mount(Collection $positions)
     {
-        $this->positions = []; // hapus positions collection
+        $this->positions = [];
         foreach ($positions as $position) {
             $this->positions[] = ['id' => $position->id, 'name' => $position->name];
         }
@@ -20,8 +20,6 @@ class PositionEditForm extends Component
 
     public function savePositions()
     {
-        // tidak mengimplementasikan validasi, karena jika input kosong berarti data tersebut tidak akan diubah
-        // ambil input/request dari position yang berisi
         $positions = array_filter($this->positions, function ($a) {
             return trim($a['name']) !== "";
         });

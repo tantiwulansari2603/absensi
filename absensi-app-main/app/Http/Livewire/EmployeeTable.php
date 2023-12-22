@@ -77,7 +77,6 @@ final class EmployeeTable extends PowerGridComponent
                 return $this->dispatchBrowserEvent('showToast', ['success' => false, 'message' => 'Pilih data yang ingin diedit terlebih dahulu.']);
 
             $ids = join('-', $ids);
-            // return redirect(route('employees.edit', ['ids' => $ids])); // tidak berfungsi/menredirect
             return $this->dispatchBrowserEvent('redirect', ['url' => route('employees.edit', ['ids' => $ids])]);
         }
     }

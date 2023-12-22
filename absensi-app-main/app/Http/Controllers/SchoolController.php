@@ -28,7 +28,6 @@ class SchoolController extends Controller
             return redirect()->back();
         $ids = explode('-', $ids);
 
-        // ambil data user yang hanya memiliki User::USER_ROLE_ID / role untuk karyawaan
         $school = School::query()
             ->whereIn('id', $ids)
             ->get();

@@ -17,7 +17,6 @@ class HolidayEditForm extends Component
     {
         $this->holidays = [];
         foreach ($holidays as $holiday) {
-            // $this->holidays[] = $holiday->toArray(); // jika menggunakan ini akan terjadi bandwith yang cukup besar
             $this->holidays[] = [
                 'id' => $holiday->id,
                 'title' => $holiday->title,
@@ -41,7 +40,6 @@ class HolidayEditForm extends Component
         }
 
         $affected = 0;
-        // alasan menggunakan create alih2 mengunakan ::insert adalah karena tidak looping untuk menambahkan created_at dan updated_at
         foreach ($this->holidays as $holiday) {
             $holidayBeforeUpdated = Holiday::find($holiday['id']);
 

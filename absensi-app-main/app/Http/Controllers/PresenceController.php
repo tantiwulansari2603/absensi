@@ -73,7 +73,6 @@ class PresenceController extends Controller
             ->where('presence_date', $byDate)
             ->get(['presence_date', 'user_id']);
 
-        // jika semua karyawan tidak hadir
         if ($presences->isEmpty()) {
             $notPresentData[] =
                 [
@@ -131,7 +130,6 @@ class PresenceController extends Controller
             ->where('presence_date', $validated['presence_date'])
             ->first();
 
-        // jika data user yang didapatkan dari request user_id, presence_date, sudah absen atau sudah ada ditable presences
         if ($presence || !$user)
             return back()->with('failed', 'Request tidak diterima.');
 
@@ -168,7 +166,6 @@ class PresenceController extends Controller
             ->where('presence_date', $validated['permission_date'])
             ->first();
 
-        // jika data user yang didapatkan dari request user_id, presence_date, sudah absen atau sudah ada ditable presences
         if ($presence || !$user)
             return back()->with('failed', 'Request tidak diterima.');
 
@@ -230,7 +227,7 @@ class PresenceController extends Controller
                     ->whereNotIn('id', $presence['user_ids'])
                     ->when($attendance->location, function ($query) use ($attendance) {
                         $query->where('locations_id', $attendance->location->id);
-                    }) // Sesuaikan dengan nama kolom yang sesuai di dalam database
+                    })
                     ->get()
                     ->toArray()
             ];

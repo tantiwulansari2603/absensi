@@ -9,11 +9,12 @@ class LocationCreateForm extends Component
 {
     public $locations;
     private $initialValue = [
-        'nama' => '', 
-        'alamat' => '', 
-        'latitude' => '', 
-        'longitude' => ''];
-    
+        'nama' => '',
+        'alamat' => '',
+        'latitude' => '',
+        'longitude' => ''
+    ];
+
     public function mount()
     {
         $this->locations = [$this->initialValue];
@@ -39,7 +40,6 @@ class LocationCreateForm extends Component
             'locations.*.longitude' => 'required',
         ]);
 
-        // alasan menggunakan create alih2 mengunakan ::insert adalah karena tidak looping untuk menambahkan created_at dan updated_at
         foreach ($this->locations as $location) {
             Location::create($location);
         }

@@ -24,16 +24,15 @@ class EmployeeEditForm extends Component
 
     public function mount(Collection $employees)
     {
-        $this->employees = []; // reset, karena ada data employees sebelumnya
-
+        $this->employees = [];
         foreach ($employees as $employee) {
             $this->employees[] = [
                 'id' => $employee->id,
                 'name' => $employee->name,
                 'email' => $employee->email,
-                'original_email' => $employee->email, // untuk cek validasi unique
+                'original_email' => $employee->email,
                 'phone' => $employee->phone,
-                'original_phone' => $employee->phone, // untuk cek validasi unique nanti
+                'original_phone' => $employee->phone,
                 'role_id' => $employee->role_id,
                 'position_id' => $employee->position_id,
                 'schools_id' => $employee->schools_id,
@@ -73,7 +72,6 @@ class EmployeeEditForm extends Component
             return session()->flash('failed', 'Pastikan input Email tidak mangandung nilai yang sama dengan input lainnya.');
         }
 
-        // alasan menggunakan create alih2 mengunakan ::insert adalah karena tidak looping untuk menambahkan created_at dan updated_at
         $affected = 0;
         foreach ($this->employees as $employee) {
             // cek unique validasi

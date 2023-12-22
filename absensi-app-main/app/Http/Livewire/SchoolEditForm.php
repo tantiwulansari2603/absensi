@@ -12,7 +12,7 @@ class SchoolEditForm extends Component
 
     public function mount(Collection $school)
     {
-        $this->school = []; // hapus positions collection
+        $this->school = [];
         foreach ($school as $schools) {
             $this->school[] = ['id' => $schools->id, 'nama_sekolah' => $schools->nama_sekolah];
         }
@@ -20,8 +20,6 @@ class SchoolEditForm extends Component
 
     public function saveSchool()
     {
-        // tidak mengimplementasikan validasi, karena jika input kosong berarti data tersebut tidak akan diubah
-        // ambil input/request dari position yang berisi
         $school = array_filter($this->school, function ($a) {
             return trim($a['nama_sekolah']) !== "";
         });

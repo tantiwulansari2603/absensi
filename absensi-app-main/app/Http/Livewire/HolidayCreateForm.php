@@ -34,7 +34,6 @@ class HolidayCreateForm extends Component
             'holidays.*.holiday_date' => 'required|date|unique:holidays',
         ]);
 
-        // alasan menggunakan create alih2 mengunakan ::insert adalah karena tidak looping untuk menambahkan created_at dan updated_at
         foreach ($this->holidays as $holiday) {
             Holiday::create($holiday);
         }

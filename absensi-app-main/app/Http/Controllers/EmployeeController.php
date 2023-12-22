@@ -28,7 +28,6 @@ class EmployeeController extends Controller
             return redirect()->back();
         $ids = explode('-', $ids);
 
-        // ambil data user yang hanya memiliki User::USER_ROLE_ID / role untuk karyawaan
         $employees = User::query()
             ->whereIn('id', $ids)
             ->get();
@@ -39,7 +38,6 @@ class EmployeeController extends Controller
         ]);
     }
 
-    //mencoba ijin untuk ditampilkan
     public function viewPermissions($userId)
     {
         $user = User::findOrFail($userId);

@@ -12,7 +12,7 @@ class LocationEditForm extends Component
 
     public function mount(Collection $locations)
     {
-        $this->locations = []; // hapus location collection
+        $this->locations = [];
         foreach ($locations as $location) {
             $this->locations[] = [
                 'id' => $location->id,
@@ -26,8 +26,6 @@ class LocationEditForm extends Component
 
     public function saveLocations()
     {
-        // tidak mengimplementasikan validasi, karena jika input kosong berarti data tersebut tidak akan diubah
-        // ambil input/request dari location yang berisi
         $locations = array_filter($this->locations, function ($a) {
             return trim($a['nama']) !== "";
         });
@@ -35,9 +33,9 @@ class LocationEditForm extends Component
         $affected = 0;
         foreach ($locations as $location) {
             $affected += Location::find($location['id'])->update([
-                'nama' => $location['nama'], 
-                'alamat' => $location['alamat'], 
-                'latitude' => $location['latitude'], 
+                'nama' => $location['nama'],
+                'alamat' => $location['alamat'],
+                'latitude' => $location['latitude'],
                 'longitude' => $location['longitude'],
             ]);
         }
